@@ -1,20 +1,22 @@
 const items = [
   { icon: '🛵', title: 'Delivery a domicilio', sub: 'Chiclayo · Yape / Plin / Efectivo' },
-  { icon: '🪑', title: 'Reserva de mesa',      sub: 'Confirmación inmediata por WhatsApp' },
-  { icon: '🛍️', title: 'Recojo en local',      sub: 'Av. Balta 636 · Listo en 20 min' },
-  { icon: '📱', title: 'Pago fácil',           sub: 'Yape · Plin · Efectivo' },
+  { icon: '🪑', title: 'Reserva de mesa', sub: 'Confirmación inmediata por WhatsApp' },
+  { icon: '🛍️', title: 'Recojo en local', sub: 'Av. Balta 637 · Listo en 20 min' },
+  { icon: '📱', title: 'Pago fácil', sub: 'Yape / Plin / Efectivo' },
 ]
-
+ 
 export default function Strip() {
   return (
-    <div className="strip-grid">
+    <div className="strip-container" style={{
+      background: 'var(--navy)',
+      display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+    }}>
       {items.map((item, i) => (
         <div
           key={i}
           className="strip-item"
           style={{
-            padding: '36px 32px',
-            display: 'flex', alignItems: 'center', gap: 16,
+            padding: '36px 32px', display: 'flex', alignItems: 'center', gap: 16,
             borderRight: i < 3 ? '1px solid var(--border)' : 'none',
             transition: 'background 0.25s', cursor: 'default',
           }}
@@ -28,6 +30,24 @@ export default function Strip() {
           </div>
         </div>
       ))}
+ 
+      <style>{`
+        @media (max-width: 768px) {
+          .strip-container {
+            padding: 20px !important;
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .strip-item {
+            padding: 20px 16px !important;
+            border-right: none !important;
+            border-bottom: 1px solid var(--border) !important;
+          }
+          .strip-item:nth-child(3),
+          .strip-item:nth-child(4) {
+            border-bottom: none !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
