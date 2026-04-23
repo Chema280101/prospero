@@ -239,7 +239,8 @@ export default function ExperienceSection() {
         }
 
         @media (max-width: 768px) {
-          .experience-section { padding: 60px 20px; }
+          .experience-section { padding: 60px 20px; max-width: 100vw; }
+          .experience-header { padding: 0 10px; }
           .experience-slider {
             aspect-ratio: 4/3;
             margin-bottom: 40px;

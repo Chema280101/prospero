@@ -119,7 +119,9 @@ export function Location() {
 
       <style>{`
         @media(max-width:768px){
-          section#ubicacion { grid-template-columns: 1fr !important; padding: 60px 20px !important; }
+          section#ubicacion { grid-template-columns: 1fr !important; padding: 60px 20px !important; gap: 40px !important; }
+          section#ubicacion iframe { height: 280px !important; min-height: 280px !important; }
+          section#ubicacion h2 { font-size: 2rem !important; }
         }
       `}</style>
     </section>

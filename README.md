@@ -190,7 +190,7 @@ src/
 
 ## 📞 Contacto del Restaurante
 
-- **Dirección**: Av. Balta 636, Chiclayo, Perú
+- **Dirección**: Av. Balta 637, Chiclayo, Perú
 - **WhatsApp**: 906 875 085
 - **Horario**: Lun-Dom 11:00-15:00 | 19:00-22:00
 
