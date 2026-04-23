@@ -1,244 +1,246 @@
-import { useState } from 'react';
-
-const menuData = {
-  desayunos: {
-    title: 'Desayunos',
-    categories: [
-      {
-        name: 'Desayunos',
-        items: [
-          { name: 'Chicharrón de Chancho', price: 23 },
-          { name: 'Frito Chiclayano', price: 23 },
-          { name: 'Cau cau', price: 18 },
-          { name: 'Patita con maní', price: 21 },
-          { name: 'Hígado encebollado', price: 19 },
-          { name: 'Sangrecita', price: 18 },
-          { name: 'Cabrito con yucas', price: 23 },
-          { name: 'Pescado Frito en Filete', price: 28 },
-          { name: 'Hueveras fritas', price: 22 },
-          { name: 'Lomito al jugo', price: 19 },
-          { name: 'Saltadito de pollo', price: 19 },
-        ],
-      },
-      {
-        name: 'Sánguches',
-        items: [
-          { name: 'Chicharrón', price: 13 },
-          { name: 'Jamón del país', price: 12 },
-          { name: 'Chanchito oriental dulce', price: 12 },
-          { name: 'Chanchito Oriental salado', price: 12 },
-          { name: 'Pellejito Oriental', price: 9 },
-          { name: 'Pavo', price: 12 },
-          { name: 'Asado criollo', price: 12 },
-          { name: 'Lomito ahumado', price: 14 },
-          { name: 'Pollo con mayonesa', price: 12 },
-          { name: 'Pollo mechado', price: 12 },
-        ],
-      },
-      {
-        name: 'Complementos',
-        items: [
-          { name: 'Humita de queso', price: 4.5 },
-          { name: 'Humita doble queso', price: 6 },
-          { name: 'Mote guisado', price: 8 },
-          { name: 'Marraquetas x3', price: 2 },
-          { name: 'Pan x3', price: 3 },
-          { name: 'Camote frito', price: 6 },
-          { name: 'Yucas fritas', price: 7 },
-          { name: 'Papas crocantes', price: 8 },
-          { name: 'Arroz', price: 5 },
-          { name: 'Huevos', price: 8 },
-        ],
-      },
-      {
-        name: 'Postre del día',
-        items: [
-          { name: 'Crema Volteada / Pecado de Chocolate / Tentación de Lúcuma', price: 15 },
-          { name: 'La Manzana del Deseo', price: 18 },
-        ],
-      },
-    ],
-  },
-  cartaBrava: {
-    title: 'Carta Brava',
-    badge: 'Su Lunes de Espesado s/36',
-    categories: [
-      {
-        name: 'Para Picar',
-        items: [
-          { name: 'Leche de tigre carretillera', price: 28 },
-          { name: 'Tortitas acevichadas', price: 34 },
-          { name: 'Ceviche norteño', price: 38 },
-          { name: 'Ceviche mixto Tollo', price: 46 },
-          { name: 'Ceviche de charela', price: 48 },
-          { name: 'Causa de Pulpo al Olivo', price: 35 },
-          { name: 'Causa acevichada', price: 32 },
-          { name: 'Choritos a la chalaca', price: 26 },
-          { name: 'Pulpo al olivo', price: 38 },
-          { name: 'Jamón de caballa', price: 30 },
-          { name: 'Papa rellena de cabrito', price: 21 },
-          { name: 'Papa rellena tradicional', price: 18 },
-          { name: 'Papa a la huancaína', price: 15 },
-          { name: 'Ensaladón de la casa', price: 25, highlight: true },
-          { name: 'Spring rolls de carne', price: 25 },
-          { name: 'Langostinos al panko', price: 28 },
-        ],
-      },
-      {
-        name: 'Cuchara Brava',
-        items: [
-          { name: 'Arroz con Chancho Próspero', price: 35, highlight: true },
-          { name: 'Calentado norteño', price: 36 },
-          { name: 'Calentado en salsa de mariscos', price: 38 },
-          { name: 'Calentado con lomo saltado', price: 40 },
-          { name: 'Cabrito norteño tradicional', price: 32 },
-          { name: 'Meloso de pato', price: 38 },
-          { name: 'Gallina estofada con arroz y frejoles', price: 28 },
-          { name: 'Arroz tapado con huevo montado y plátanos', price: 28 },
-          { name: 'Arroz cremoso de mariscos', price: 38 },
-          { name: 'Escabeche de bonito', price: 28 },
-          { name: 'Lengua guisada con arroz y puré', price: 28 },
-          { name: 'Ají de gallina', price: 28 },
-          { name: 'Lasaña de la casa', price: 29 },
-          { name: 'Lomo saltado', price: 42 },
-          { name: 'Milanesa de pollo', price: 25 },
-          { name: 'Asado con arroz y puré', price: 28 },
-          { name: 'Aeropuerto José Quiñones', price: 30 },
-          { name: 'Asado de tira en cocción lenta con puré de loche', price: 42 },
-          { name: 'Spaguetti al pesto con sábana de lomo', price: 42 },
-          { name: 'Spaguetti a la huancaína con lomo saltado', price: 42 },
-          { name: 'Tallarín saltado criollo', price: 29 },
-        ],
-      },
-    ],
-  },
-  bebidas: {
-    title: 'Bebidas',
-    categories: [
-      {
-        name: 'La Cafetería',
-        items: [
-          { name: 'Chocolate caliente con malvaviscos', price: 15, highlight: true },
-          { name: 'Café pasado', price: 7 },
-          { name: 'Capuccino', price: 10 },
-          { name: 'Expreso', price: 8 },
-          { name: 'Café con leche', price: 8 },
-          { name: 'Infusiones', price: 6 },
-        ],
-      },
-      {
-        name: 'Jugos',
-        items: [
-          { name: 'Piña', price: 9 },
-          { name: 'Papaya', price: 9 },
-          { name: 'Mixto', price: 11 },
-          { name: 'Fresa', price: 12 },
-          { name: 'Fresa con leche', price: 14 },
-          { name: 'Naranja', price: 12 },
-        ],
-      },
-      {
-        name: 'Refrescantes (Vaso / Jarra)',
-        items: [
-          { name: 'Maracuyá', price: '8 / 15' },
-          { name: 'Chicha morada', price: '8 / 15' },
-          { name: 'Hierba fresca de Los Andes', price: '9 / 18' },
-          { name: 'Manto cítrico', price: '9 / 18' },
-          { name: 'Frozen Clásica', price: '9 / 18' },
-        ],
-      },
-      {
-        name: 'Gaseosas',
-        items: [
-          { name: 'Inca Kola y Coca Cola', price: 5 },
-          { name: 'Casinelli y agua', price: 5 },
-        ],
-      },
-      {
-        name: 'La Cantina',
-        items: [
-          { name: 'Chilcano tradicional', price: 20 },
-          { name: 'Chilcano de maracuyá', price: 20 },
-          { name: 'Chilcano frutos rojos', price: 20 },
-          { name: 'Pisco sour', price: 22 },
-          { name: 'Tinto de verano', price: 22 },
-          { name: 'Cuba libre', price: 15 },
-          { name: 'Anisado shot', price: 7 },
-          { name: 'Cerveza Pilsen', price: 8 },
-          { name: 'Cusqueña Trigo/Negra', price: 11 },
-        ],
-      },
-    ],
-  },
-};
-
-const MenuSection = () => {
-  const [activeTab, setActiveTab] = useState('desayunos');
-
-  const tabs = [
-    { id: 'desayunos', label: 'Desayunos' },
-    { id: 'cartaBrava', label: 'Carta Brava' },
-    { id: 'bebidas', label: 'Bebidas' },
-  ];
-
+import { useState } from 'react'
+import MenuItemModal from './MenuItemModal'
+import {
+  desayunos, sanguches, complementos,
+  parapicar, cucharaBrava,
+  cafeteria, jugos, refrescantes, gaseosas, cantina,
+} from '../../data/menuData'
+ 
+function MenuRow({ name, price, bold, desc, img, vaso, jarra, onClick }) {
+  const displayPrice = price || vaso || ''
+  
   return (
-    <section id="carta" className="py-20 bg-cream-light reveal">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-navy-dark mb-4">Nuestra Carta</h2>
-          <p className="text-navy-mid text-lg">Sabores auténticos del norte peruano</p>
+    <div 
+      className="menu-item"
+      onClick={onClick}
+      style={{ 
+        cursor: desc ? 'pointer' : 'default',
+        transition: 'background 0.2s',
+      }}
+      onMouseEnter={e => desc && (e.currentTarget.style.background = 'rgba(13,43,78,0.03)')}
+      onMouseLeave={e => desc && (e.currentTarget.style.background = 'transparent')}
+    >
+      <span className="menu-item-name" style={{ fontWeight: bold ? 600 : 400 }}>
+        {desc && <span style={{ color: 'var(--navy-mid)', marginRight: 6 }}>👁</span>}
+        {name}
+      </span>
+      <span className="menu-item-price">{displayPrice}</span>
+    </div>
+  )
+}
+ 
+function MenuGroup({ title, items, onItemClick }) {
+  return (
+    <div style={{ marginBottom: 36 }}>
+      <div className="menu-group-title">{title}</div>
+      {items.map((item, i) => (
+        <MenuRow key={i} {...item} onClick={() => onItemClick && item.desc && onItemClick(item)} />
+      ))}
+    </div>
+  )
+}
+ 
+function TabDesayunos({ onItemClick }) {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px' }}>
+      <div>
+        <MenuGroup title="Desayunos" items={desayunos} onItemClick={onItemClick} />
+        <MenuGroup title="Complementos" items={complementos} onItemClick={onItemClick} />
+      </div>
+      <div>
+        <MenuGroup title="Sánguches" items={sanguches} onItemClick={onItemClick} />
+        {/* Postre */}
+        <div className="menu-group-title">Postre del día</div>
+        <div style={{
+          background: 'var(--navy)', padding: '28px 24px', borderRadius: 2,
+          textAlign: 'center',
+        }}>
+          <p style={{ color: 'var(--cream)', fontSize: '0.85rem', lineHeight: 2 }}>
+            Crema Volteada de La Casa · Pecado de Chocolate · Tentación de Lúcuma
+          </p>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.4rem', fontWeight: 700, color: 'var(--cream)', marginTop: 8 }}>
+            S/ 15
+          </p>
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '16px 0' }} />
+          <p style={{ color: 'var(--cream)', fontSize: '0.85rem' }}>La Manzana del Deseo</p>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.4rem', fontWeight: 700, color: 'var(--cream)', marginTop: 4 }}>
+            S/ 18
+          </p>
         </div>
+      </div>
+      <style>{`@media(max-width:768px){div[style*="repeat(2, 1fr)"]{grid-template-columns:1fr!important;}}`}</style>
+    </div>
+  )
+}
+ 
+function TabCarta({ onItemClick }) {
+  return (
+    <div>
+      {/* Espesado badge */}
+      <a
+        href="https://wa.me/51906875085?text=Hola%20Pr%C3%B3spero!%F0%9F%91%8B%0A%0AQuiero%20pedir%20el%20plato%20especial%20de%20la%20semana:%0ASu%20Lunes%20de%20Espesado%20-%20S/%2036%0A%0APor%20favor%20confirmar%20disponibilidad."
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          background: 'var(--navy)', padding: '22px 32px', borderRadius: 2,
+          marginBottom: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          textDecoration: 'none', cursor: 'pointer', transition: 'transform 0.2s',
+        }}
+        onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+        onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+      >
+        <div>
+          <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--muted)' }}>
+            Plato especial de la semana
+          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.5rem', fontWeight: 900, color: 'var(--cream)' }}>
+            Su Lunes de Espesado
+          </div>
+        </div>
+        <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '2rem', fontWeight: 900, color: 'var(--cream)' }}>
+          S/ 36
+        </div>
+      </a>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px 80px' }}>
+        <MenuGroup title="Para Picar" items={parapicar} onItemClick={onItemClick} />
+        <MenuGroup title="Cuchara Brava" items={cucharaBrava} onItemClick={onItemClick} />
+      </div>
+      <style>{`@media(max-width:768px){div[style*="repeat(2, 1fr)"]{grid-template-columns:1fr!important;}}`}</style>
+    </div>
+  )
+}
+ 
+function TabBebidas({ onItemClick }) {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 60px' }}>
+      {/* Col 1 */}
+      <div>
+        <MenuGroup title="La Cafetería" items={cafeteria} onItemClick={onItemClick} />
+        <p style={{ fontSize: '0.7rem', color: 'rgba(13,43,78,0.4)', fontStyle: 'italic', marginBottom: 28 }}>
+          manzanilla · menta · jamaica y canela · naranja, canela y durazno · cedrón, hierba buena y hierba luisa
+        </p>
+        <MenuGroup title="Jugos" items={jugos} onItemClick={onItemClick} />
+      </div>
+      {/* Col 2 */}
+      <div>
+        <div className="menu-group-title">Refrescantes</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0 20px', marginBottom: 6 }}>
+          <span />
+          {['Vaso', 'Jarra'].map(h => (
+            <span key={h} style={{ fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(13,43,78,0.35)' }}>{h}</span>
+          ))}
+        </div>
+        {refrescantes.map((r, i) => (
+          <div 
+            key={i} 
+            onClick={() => onItemClick && r.desc && onItemClick(r)}
+            style={{ 
+              display: 'grid', 
+              gridTemplateColumns: '1fr auto auto', 
+              gap: '0 20px', 
+              alignItems: 'baseline', 
+              padding: '8px 0', 
+              borderBottom: '1px solid rgba(13,43,78,0.08)',
+              cursor: r.desc ? 'pointer' : 'default',
+              transition: 'background 0.2s',
+            }}
+            onMouseEnter={e => r.desc && (e.currentTarget.style.background = 'rgba(13,43,78,0.03)')}
+            onMouseLeave={e => r.desc && (e.currentTarget.style.background = 'transparent')}
+          >
+            <span style={{ fontSize: '0.85rem', color: 'var(--navy)' }}>
+              {r.desc && <span style={{ color: 'var(--navy-mid)', marginRight: 6 }}>👁</span>}
+              {r.name}
+            </span>
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '0.85rem', fontWeight: 700, color: 'var(--navy)' }}>{r.vaso}</span>
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '0.85rem', fontWeight: 700, color: 'var(--navy)' }}>{r.jarra}</span>
+          </div>
+        ))}
+        <div style={{ marginTop: 32 }}>
+          <MenuGroup title="Gaseosas" items={gaseosas} onItemClick={onItemClick} />
+        </div>
+      </div>
+      {/* Col 3 */}
+      <div>
+        <MenuGroup title="La Cantina" items={cantina} onItemClick={onItemClick} />
+      </div>
+      <style>{`@media(max-width:768px){div[style*="repeat(3, 1fr)"]{grid-template-columns:1fr!important;}}`}</style>
+    </div>
+  )
+}
+ 
+const TABS = [
+  { id: 'des',   label: 'Desayunos' },
+  { id: 'carta', label: 'Carta Brava' },
+  { id: 'beb',   label: 'Bebidas' },
+]
+ 
+export default function MenuSection() {
+  const [active, setActive] = useState('des')
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-        <div className="flex justify-center gap-4 mb-12">
-          {tabs.map((tab) => (
+  const handleItemClick = (item) => {
+    setSelectedItem(item)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedItem(null)
+  }
+ 
+  return (
+    <section id="carta" style={{ padding: '100px 80px', background: 'var(--cream-light)' }}>
+      {/* Header */}
+      <div className="reveal" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 52 }}>
+        <div>
+          <div className="sec-label-dark">Lo que servimos</div>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 3vw, 3rem)', fontWeight: 900, color: 'var(--navy)', lineHeight: 1.1 }}>
+            Nuestra <em style={{ fontStyle: 'italic', color: 'var(--navy-mid)' }}>carta</em>
+          </h2>
+        </div>
+ 
+        {/* Tabs */}
+        <div style={{ display: 'flex', background: 'rgba(13,43,78,0.07)', padding: 4, borderRadius: 3, gap: 3 }}>
+          {TABS.map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-3 rounded-sm uppercase text-sm tracking-wider font-semibold transition-all ${
-                activeTab === tab.id
-                  ? 'bg-navy text-cream'
-                  : 'bg-white text-navy-mid hover:bg-navy hover:text-cream'
-              }`}
+              onClick={() => setActive(tab.id)}
+              style={{
+                padding: '9px 22px', borderRadius: 2, border: 'none',
+                background: active === tab.id ? 'var(--navy)' : 'none',
+                color: active === tab.id ? 'var(--cream)' : 'rgba(13,43,78,0.4)',
+                fontSize: '0.73rem', fontWeight: 600, textTransform: 'uppercase',
+                letterSpacing: '1.2px', cursor: 'pointer', transition: 'all 0.2s',
+                fontFamily: "'DM Sans', sans-serif",
+              }}
             >
               {tab.label}
             </button>
           ))}
         </div>
-
-        {menuData[activeTab].badge && (
-          <div className="bg-navy text-cream text-center py-3 px-6 rounded-sm mb-8 inline-block">
-            <span className="font-semibold uppercase tracking-wider">{menuData[activeTab].badge}</span>
-          </div>
-        )}
-
-        <div className="space-y-12">
-          {menuData[activeTab].categories.map((category, categoryIndex) => (
-            <div key={category.name} className="reveal" style={{ animationDelay: `${categoryIndex * 0.1}s` }}>
-              <h3 className="font-serif text-2xl font-bold text-navy-dark mb-6 pb-2 border-b-2 border-navy-mid">
-                {category.name}
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                {category.items.map((item, itemIndex) => (
-                  <div
-                    key={item.name}
-                    className="flex justify-between items-start p-4 bg-white rounded-sm shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
-                  >
-                    <span className={`text-navy-dark ${item.highlight ? 'font-semibold' : ''}`}>
-                      {item.highlight && <span className="text-amber-600 mr-2">✳</span>}
-                      {item.name}
-                    </span>
-                    <span className="text-navy-mid font-semibold whitespace-nowrap ml-4">
-                      s/{item.price}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
-    </section>
-  );
-};
+ 
+      {/* Panel */}
+      <div className="reveal">
+        {active === 'des'   && <TabDesayunos onItemClick={handleItemClick} />}
+        {active === 'carta' && <TabCarta onItemClick={handleItemClick} />}
+        {active === 'beb'   && <TabBebidas onItemClick={handleItemClick} />}
+      </div>
 
-export default MenuSection;
+      {/* Modal */}
+      <MenuItemModal 
+        item={selectedItem} 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
+ 
+      <style>{`
+        @media(max-width:768px){
+          section#carta { padding: 60px 20px !important; }
+          div[style*="flex; justifyContent: space-between"] { flex-direction: column; gap: 20px; }
+        }
+      `}</style>
+    </section>
+  )
+}

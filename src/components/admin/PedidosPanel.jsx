@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Bike, ShoppingBag, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { Bike, ShoppingBag, Clock, CircleCheck, XCircle } from 'lucide-react';
 
 const PedidosPanel = ({ onNewOrdersCountChange }) => {
   const [pedidos, setPedidos] = useState([]);
@@ -194,7 +194,7 @@ const PedidosPanel = ({ onNewOrdersCountChange }) => {
                   onClick={() => updateEstado(pedido.id, getNextEstado(pedido.estado))}
                   className="flex items-center gap-2 px-4 py-2 bg-cream text-navy-dark rounded-sm uppercase text-xs font-semibold hover:bg-cream-light transition-all"
                 >
-                  <CheckCircle size={16} />
+                  <CircleCheck size={16} />
                   {estadoLabels[getNextEstado(pedido.estado)]}
                 </button>
               )}

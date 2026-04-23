@@ -1,98 +1,118 @@
-import { useEffect, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import hero from '../../assets/hero.png'
 
-const Hero = () => {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
+export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-navy-dark">
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-dark via-navy-mid to-navy-dark opacity-50" />
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <div className="space-y-8">
-          <p
-            className={`text-cream-muted text-sm uppercase tracking-[0.3em] fade-up ${
-              loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-            style={{ animationDelay: '0.1s' }}
-          >
-            Taberna Peruana · Av. Balta 636, Chiclayo
-          </p>
-          
-          <h1
-            className={`font-serif text-6xl md:text-8xl font-bold text-cream leading-tight fade-up ${
-              loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-            style={{ animationDelay: '0.3s' }}
-          >
-            Cocina norteña
-            <br />
-            <span className="italic">de verdad.</span>
-          </h1>
-          
-          <p
-            className={`text-cream-light text-lg md:text-xl max-w-2xl mx-auto fade-up ${
-              loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-            style={{ animationDelay: '0.5s' }}
-          >
-            Tradición peruana en cada plato. Sabores auténticos del norte en un ambiente elegante y acogedor.
-          </p>
-          
-          <div
-            className={`flex flex-col sm:flex-row gap-4 justify-center fade-up ${
-              loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-            style={{ animationDelay: '0.7s' }}
-          >
-            <button
-              onClick={() => scrollToSection('pedidos')}
-              className="bg-cream text-navy-dark px-8 py-4 rounded-sm uppercase text-sm tracking-wider font-semibold transition-all hover:transform hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              Pedir ahora
-            </button>
-            <button
-              onClick={() => scrollToSection('carta')}
-              className="border-2 border-cream text-cream px-8 py-4 rounded-sm uppercase text-sm tracking-wider font-semibold transition-all hover:bg-cream hover:text-navy-dark hover:transform hover:-translate-y-0.5"
-            >
-              Ver carta
-            </button>
-          </div>
-        </div>
+    <section style={{
+      position: 'relative', minHeight: '100vh',
+      display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+      overflow: 'hidden', background: 'var(--navy-dark)',
+    }}>
+      {/* Background Image */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        backgroundImage: `url(${hero})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }} />
 
-        <div
-          className={`mt-16 flex justify-center items-center gap-8 text-cream-muted text-sm fade-up ${
-            loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
-          style={{ animationDelay: '0.9s' }}
-        >
-          <span>Balta 636</span>
-          <span>·</span>
-          <span>906 875 085</span>
-          <span>·</span>
-          <span>4.9★</span>
+      {/* BG overlay gradient */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 1,
+        background: 'linear-gradient(to bottom, rgba(7,26,48,0.4) 0%, rgba(7,26,48,0.2) 30%, rgba(7,26,48,0.75) 65%, rgba(7,26,48,0.98) 100%)',
+      }} />
+ 
+      {/* Subtle texture pattern */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 0, opacity: 0.04,
+        backgroundImage: `repeating-linear-gradient(45deg, var(--cream) 0, var(--cream) 1px, transparent 0, transparent 50%)`,
+        backgroundSize: '20px 20px',
+      }} />
+ 
+      {/* CONTENT */}
+      <div style={{
+        position: 'relative', zIndex: 10,
+        padding: '0 80px 80px',
+        maxWidth: 760,
+      }}>
+        {/* Eyebrow */}
+        <div className="anim-1" style={{
+          fontSize: '0.68rem', fontWeight: 500, textTransform: 'uppercase',
+          letterSpacing: '3px', color: 'var(--cream-dark)', marginBottom: 24,
+        }}>
+          Próspero · Taberna Peruana
+        </div>
+ 
+        {/* H1 */}
+        <h1 className="anim-2" style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: 'clamp(3.2rem, 6vw, 6rem)',
+          fontWeight: 900, lineHeight: 1.0,
+          color: 'var(--cream)', marginBottom: 20,
+        }}>
+          Cocina norteña<br />
+          <em style={{ fontStyle: 'italic', color: 'rgba(240,234,214,0.55)' }}>de verdad.</em>
+        </h1>
+ 
+        {/* Description */}
+        <p className="anim-3" style={{
+          fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.8,
+          maxWidth: 480, marginBottom: 44,
+        }}>
+          Desayunos tradicionales, cuchara brava y la cantina más sabrosa de Chiclayo.
+          Pide delivery, reserva tu mesa o recoge — todo desde aquí, sin llamadas.
+        </p>
+ 
+        {/* CTA Buttons */}
+        <div className="anim-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <a href="#pedido" className="btn-cream">Pedir ahora</a>
+          <a href="#carta" className="btn-ghost">Ver carta completa</a>
+        </div>
+ 
+        {/* Stats */}
+        <div className="anim-5" style={{
+          display: 'flex', gap: 0, marginTop: 64,
+          paddingTop: 28, borderTop: '1px solid var(--border)',
+        }}>
+          {[
+            { val: '9+ años', key: 'Experiencia' },
+            { val: '500+ clientes', key: 'Satisfechos' },
+            { val: '30+ platos', key: 'Tradicionales' },
+          ].map((s, i) => (
+            <div key={i} style={{
+              flex: 1,
+              paddingLeft: i > 0 ? 32 : 0,
+              borderLeft: i > 0 ? '1px solid var(--border)' : 'none',
+              marginLeft: i > 0 ? 32 : 0,
+            }}>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.7rem', fontWeight: 700, color: 'var(--cream)' }}>
+                {s.val}
+              </div>
+              <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--muted)', marginTop: 4 }}>
+                {s.key}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      <button
-        onClick={() => scrollToSection('strip')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream scroll-indicator"
-      >
-        <ChevronDown size={32} />
-      </button>
+ 
+      {/* Scroll indicator */}
+      <div className="anim-6" style={{
+        position: 'absolute', bottom: 32, left: '50%', transform: 'translateX(-50%)',
+        zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+        color: 'var(--muted)',
+      }}>
+        <span style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Scroll</span>
+        <div className="scroll-line" />
+      </div>
+ 
+      <style>{`
+        @media (max-width: 768px) {
+          section > div[style*="padding: 0 80px"] {
+            padding: 0 24px 64px !important;
+          }
+        }
+      `}</style>
     </section>
-  );
-};
-
-export default Hero;
+  )
+}

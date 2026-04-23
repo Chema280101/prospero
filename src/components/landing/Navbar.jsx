@@ -1,86 +1,106 @@
-import { useState, useEffect } from 'react';
-import { ScrolledDown } from 'lucide-react';
+import { useState, useEffect } from 'react'
+import { Menu, X } from 'lucide-react'
+import logo from '../../assets/logo.jpeg'
+import { WhatsAppIcon } from '../icons/SocialIcons'
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const closeMenu = () => setMenuOpen(false)
+
+  const navItems = [
+    { href: '#carta', label: 'Carta' },
+    { href: '#pedido', label: 'Pedidos' },
+    { href: '#reservas', label: 'Reservas' },
+    { href: '#ubicacion', label: 'Ubicación' },
+  ]
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-navy-dark/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.jpg"
-              alt="Próspero Logo"
-              className="w-12 h-12 rounded-full object-cover"
-              onError={(e) => {
-                e.target.style.display = 'none';
-              }}
-            />
-            <div>
-              <h1 className="font-serif text-2xl font-bold text-cream">Próspero.</h1>
-              <p className="text-xs text-muted uppercase tracking-widest">Taberna Peruana</p>
-            </div>
+    <>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        {/* LOGO */}
+        <a href="#" className="nav-logo">
+          <img
+            src={logo}
+            alt="Próspero logo"
+            className="nav-logo-img"
+          />
+          <div className="nav-logo-text">
+            <span className="nav-logo-name">Próspero.</span>
+            <span className="nav-logo-sub">Taberna Peruana</span>
           </div>
+        </a>
 
-          <div className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection('carta')}
-              className="text-cream hover:text-cream-light transition-colors uppercase text-sm tracking-wider"
-            >
-              Carta
-            </button>
-            <button
-              onClick={() => scrollToSection('pedidos')}
-              className="text-cream hover:text-cream-light transition-colors uppercase text-sm tracking-wider"
-            >
-              Pedidos
-            </button>
-            <button
-              onClick={() => scrollToSection('reservas')}
-              className="text-cream hover:text-cream-light transition-colors uppercase text-sm tracking-wider"
-            >
-              Reservas
-            </button>
-            <button
-              onClick={() => scrollToSection('ubicacion')}
-              className="text-cream hover:text-cream-light transition-colors uppercase text-sm tracking-wider"
-            >
-              Ubicación
-            </button>
-          </div>
+        {/* NAV LINKS — desktop */}
+        <ul className="nav-links-desktop">
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} className="nav-link">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-          <a
-            href="https://wa.me/51906875085"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm uppercase text-xs tracking-wider transition-all hover:transform hover:-translate-y-0.5"
+        {/* WHATSAPP BUTTON — desktop */}
+        <a
+          href="https://wa.me/51906875085"
+          target="_blank"
+          rel="noreferrer"
+          className="nav-whatsapp-btn"
+        >
+          <WhatsAppIcon /> WhatsApp
+        </a>
+
+        {/* HAMBURGER BUTTON — mobile */}
+        <button 
+          className="nav-hamburger"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Abrir menú"
+        >
+          <Menu size={28} />
+        </button>
+      </nav>
+
+      {/* MOBILE MENU */}
+      <div className={`nav-mobile-overlay ${menuOpen ? 'open' : ''}`} onClick={closeMenu} />
+      <div className={`nav-mobile-menu ${menuOpen ? 'open' : ''}`}>
+        <button 
+          className="nav-mobile-close"
+          onClick={closeMenu}
+          aria-label="Cerrar menú"
+        >
+          <X size={32} />
+        </button>
+
+        {navItems.map((item) => (
+          <a 
+            key={item.href}
+            href={item.href} 
+            className="nav-mobile-link"
+            onClick={closeMenu}
           >
-            WhatsApp
+            {item.label}
           </a>
-        </div>
-      </div>
-    </nav>
-  );
-};
+        ))}
 
-export default Navbar;
+        <a
+          href="https://wa.me/51906875085"
+          target="_blank"
+          rel="noreferrer"
+          className="nav-whatsapp-btn"
+          style={{ marginTop: 'auto', justifyContent: 'center' }}
+        >
+          <WhatsAppIcon /> WhatsApp
+        </a>
+      </div>
+    </>
+  )
+}

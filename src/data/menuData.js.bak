@@ -1,0 +1,125 @@
+export const desayunos = [
+  { name: 'Chicharrón de Chancho', price: 'S/ 23' },
+  { name: 'Frito Chiclayano',      price: 'S/ 23' },
+  { name: 'Cau cau',               price: 'S/ 18' },
+  { name: 'Patita con maní',       price: 'S/ 21' },
+  { name: 'Hígado encebollado',    price: 'S/ 19' },
+  { name: 'Sangrecita',            price: 'S/ 18' },
+  { name: 'Cabrito con yucas',     price: 'S/ 23' },
+  { name: 'Pescado Frito en Filete', price: 'S/ 28' },
+  { name: 'Hueveras fritas',       price: 'S/ 22' },
+  { name: 'Lomito al jugo',        price: 'S/ 19' },
+  { name: 'Saltadito de pollo',    price: 'S/ 19' },
+]
+
+export const sanguches = [
+  { name: 'Chicharrón',                price: 'S/ 13', bold: true },
+  { name: 'Jamón del país de la casa', price: 'S/ 12' },
+  { name: 'Chanchito oriental dulce',  price: 'S/ 12' },
+  { name: 'Chanchito Oriental salado', price: 'S/ 12' },
+  { name: 'Pellejito Oriental',        price: 'S/ 9' },
+  { name: 'Pavo',                      price: 'S/ 12' },
+  { name: 'Asado criollo',             price: 'S/ 12' },
+  { name: 'Lomito ahumado',            price: 'S/ 14' },
+  { name: 'Pollo con mayonesa',        price: 'S/ 12' },
+  { name: 'Pollo mechado',             price: 'S/ 12' },
+]
+
+export const complementos = [
+  { name: 'Humita de queso',      price: 'S/ 4.5' },
+  { name: 'Humita doble queso',   price: 'S/ 6' },
+  { name: 'Mote guisado',         price: 'S/ 8' },
+  { name: 'Marraquetas x 3 und',  price: 'S/ 2' },
+  { name: 'Pan x 3 und',          price: 'S/ 3' },
+  { name: 'Camote frito',         price: 'S/ 6' },
+  { name: 'Yucas fritas',         price: 'S/ 7' },
+  { name: 'Papas crocantes',      price: 'S/ 8' },
+  { name: 'Arroz',                price: 'S/ 5' },
+  { name: 'Huevos (revueltos / fritos / sancohados)', price: 'S/ 8' },
+]
+
+export const parapicar = [
+  { name: 'Leche de tigre carretillera', price: 'S/ 28' },
+  { name: 'Tortitas acevichadas',        price: 'S/ 34' },
+  { name: 'Ceviche norteño',             price: 'S/ 38' },
+  { name: 'Ceviche mixto (Tollo)',       price: 'S/ 46' },
+  { name: 'Ceviche de charela',          price: 'S/ 48' },
+  { name: 'Causa de Pulpo al Olivo',     price: 'S/ 35' },
+  { name: 'Causa acevichada',            price: 'S/ 32' },
+  { name: 'Choritos a la chalaca',       price: 'S/ 26' },
+  { name: 'Pulpo al olivo',             price: 'S/ 38' },
+  { name: 'Jamón de caballa',            price: 'S/ 30' },
+  { name: 'Papa rellena de cabrito',     price: 'S/ 21' },
+  { name: 'Papa rellena tradicional',    price: 'S/ 18' },
+  { name: 'Papa a la huancaína',         price: 'S/ 15' },
+  { name: '✳ Ensaladón de la casa',     price: 'S/ 25' },
+  { name: 'Spring rolls de carne',       price: 'S/ 25' },
+  { name: 'Langostinos al panko',        price: 'S/ 28' },
+]
+
+export const cucharaBrava = [
+  { name: '✳ Arroz con Chancho Próspero', price: 'S/ 35', bold: true },
+  { name: 'Calentado norteño',            price: 'S/ 36' },
+  { name: 'Calentado en salsa de mariscos', price: 'S/ 38' },
+  { name: 'Calentado con lomo saltado',   price: 'S/ 40' },
+  { name: 'Cabrito norteño tradicional',  price: 'S/ 32' },
+  { name: 'Meloso de pato',               price: 'S/ 38' },
+  { name: 'Gallina estofada con arroz y frejoles', price: 'S/ 28' },
+  { name: 'Arroz tapado con huevo montado y plátanos', price: 'S/ 28' },
+  { name: 'Arroz cremoso de mariscos',    price: 'S/ 38' },
+  { name: 'Escabeche de bonito',          price: 'S/ 28' },
+  { name: 'Lengua guisada con arroz y puré', price: 'S/ 28' },
+  { name: 'Ají de gallina',               price: 'S/ 28' },
+  { name: 'Lasaña de la casa',            price: 'S/ 29' },
+  { name: 'Lomo saltado',                 price: 'S/ 42' },
+  { name: 'Milanesa de pollo',            price: 'S/ 25' },
+  { name: 'Asado con arroz y puré',       price: 'S/ 28' },
+  { name: 'Aeropuerto José Quiñones',     price: 'S/ 30' },
+  { name: 'Asado de tira en cocción lenta con puré de loche', price: 'S/ 42' },
+  { name: 'Spaguetti al pesto con sábana de lomo', price: 'S/ 42' },
+  { name: 'Spaguetti a la huancaína con lomo saltado', price: 'S/ 42' },
+  { name: 'Tallarín saltado criollo',     price: 'S/ 29' },
+]
+
+export const cafeteria = [
+  { name: '✳ Chocolate caliente con malvaviscos gratinados', price: 'S/ 15', bold: true },
+  { name: 'Café pasado',       price: 'S/ 7' },
+  { name: 'Capuccino',         price: 'S/ 10' },
+  { name: 'Expreso',           price: 'S/ 8' },
+  { name: 'Café con leche',    price: 'S/ 8' },
+  { name: 'Infusiones naturales', price: 'S/ 6' },
+]
+
+export const jugos = [
+  { name: 'Piña',              price: 'S/ 9' },
+  { name: 'Papaya',            price: 'S/ 9' },
+  { name: 'Mixto (papaya + piña)', price: 'S/ 11' },
+  { name: 'Fresa',             price: 'S/ 12' },
+  { name: 'Fresa con leche',   price: 'S/ 14' },
+  { name: 'Naranja natural',   price: 'S/ 12' },
+]
+
+export const refrescantes = [
+  { name: 'Maracuyá',                    vaso: 'S/ 8',  jarra: 'S/ 15' },
+  { name: 'Chicha morada',               vaso: 'S/ 8',  jarra: 'S/ 15' },
+  { name: 'Hierba fresca de Los Andes',  vaso: 'S/ 9',  jarra: 'S/ 18' },
+  { name: 'Manto cítrico',               vaso: 'S/ 9',  jarra: 'S/ 18' },
+  { name: 'Frozen Clásica',              vaso: 'S/ 9',  jarra: 'S/ 18' },
+]
+
+export const gaseosas = [
+  { name: 'Inca Kola y Coca Cola',   price: 'S/ 5' },
+  { name: 'Casinelli y agua (cg/sg)', price: 'S/ 5' },
+]
+
+export const cantina = [
+  { name: 'Chilcano tradicional',    price: 'S/ 20' },
+  { name: 'Chilcano de maracuyá',    price: 'S/ 20' },
+  { name: 'Chilcano frutos rojos',   price: 'S/ 20' },
+  { name: 'Pisco sour',              price: 'S/ 22' },
+  { name: 'Tinto de verano',         price: 'S/ 22' },
+  { name: 'Cuba libre',              price: 'S/ 15' },
+  { name: 'Anisado (shot)',          price: 'S/ 7' },
+  { name: 'Cerveza Pilsen',          price: 'S/ 8' },
+  { name: 'Cusqueña Trigo / Negra',  price: 'S/ 11' },
+]

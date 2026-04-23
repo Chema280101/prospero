@@ -1,48 +1,52 @@
-import { useEffect } from 'react';
-import Navbar from '../components/landing/Navbar';
-import Hero from '../components/landing/Hero';
-import Strip from '../components/landing/Strip';
-import MenuSection from '../components/landing/MenuSection';
-import OrderSection from '../components/landing/OrderSection';
-import ReservaSection from '../components/landing/ReservaSection';
-import Location from '../components/landing/Location';
-import Footer from '../components/landing/Footer';
-import { Toaster } from 'sonner';
+import { useEffect } from 'react'
+import { WhatsAppIcon } from '../components/icons/SocialIcons'
+import Navbar        from '../components/landing/Navbar'
+import Hero          from '../components/landing/Hero'
+import Strip         from '../components/landing/Strip'
+import ExperienceSection from '../components/landing/ExperienceSection'
+import MenuSection   from '../components/landing/MenuSection'
+import AboutSection  from '../components/landing/AboutSection'
+import TestimonialsSection from '../components/landing/TestimonialsSection'
+import OrderSection  from '../components/landing/OrderSection'
+import ReservaSection from '../components/landing/ReservaSection'
+import { Location, Footer } from '../components/landing/LocationFooter'
 
-const Landing = () => {
+export default function Landing() {
+  // Scroll reveal
   useEffect(() => {
-    const revealElements = () => {
-      const reveals = document.querySelectorAll('.reveal');
-      reveals.forEach((element) => {
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-
-        if (elementTop < windowHeight - elementVisible) {
-          element.classList.add('active');
-        }
-      });
-    };
-
-    window.addEventListener('scroll', revealElements);
-    revealElements();
-
-    return () => window.removeEventListener('scroll', revealElements);
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') }),
+      { threshold: 0.12 }
+    )
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
+      .forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div className="min-h-screen bg-navy-dark">
+    <>
       <Navbar />
       <Hero />
       <Strip />
+      <ExperienceSection />
       <MenuSection />
+      <TestimonialsSection />
+      <AboutSection />
       <OrderSection />
       <ReservaSection />
       <Location />
       <Footer />
-      <Toaster position="top-right" richColors />
-    </div>
-  );
-};
-
-export default Landing;
+      
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/51906875085"
+        target="_blank"
+        rel="noreferrer"
+        className="whatsapp-float"
+        aria-label="Contactar por WhatsApp"
+      >
+        <WhatsAppIcon />
+      </a>
+    </>
+  )
+}

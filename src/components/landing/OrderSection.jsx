@@ -1,182 +1,150 @@
-import { useState } from 'react';
-import { supabase } from '../../lib/supabase';
-import { toast } from 'sonner';
-import { Bike, ShoppingBag, Armchair } from 'lucide-react';
+import { useState } from 'react'
+import { supabase } from '../../lib/supabase'
+import { WhatsAppIcon } from '../icons/SocialIcons'
 
-const OrderSection = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [formData, setFormData] = useState({
-    nombre: '',
-    telefono: '',
-    tipo: 'delivery',
-    direccion: '',
-    pedido: '',
-  });
+export default function OrderSection() {
+  const [form, setForm] = useState({ nombre: '', telefono: '', tipo: 'delivery', direccion: '', pedido: '' })
+  const [loading, setLoading] = useState(false)
+  const [sent, setSent] = useState(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
 
-    if (!formData.nombre || !formData.pedido) {
-      toast.error('Por favor completa los campos requeridos');
-      return;
-    }
-
+  const handleSubmit = async () => {
+    if (!form.nombre || !form.pedido) return alert('Por favor completa nombre y pedido.')
+    setLoading(true)
     try {
-      const { error } = await supabase.from('pedidos').insert([
-        {
-          nombre: formData.nombre,
-          telefono: formData.telefono,
-          tipo: formData.tipo,
-          direccion: formData.direccion,
-          pedido: formData.pedido,
-          estado: 'nuevo',
-        },
-      ]);
-
-      if (error) throw error;
-
-      const whatsappMessage = `Hola Próspero! 👋
-Nombre: ${formData.nombre}
-Tipo: ${formData.tipo}
-${formData.tipo === 'delivery' ? `Dirección: ${formData.direccion}` : ''}
-Pedido: ${formData.pedido}`;
-
-      const whatsappUrl = `https://wa.me/51906875085?text=${encodeURIComponent(whatsappMessage)}`;
-      window.open(whatsappUrl, '_blank');
-
-      toast.success('Pedido enviado con éxito');
-      setFormData({ nombre: '', telefono: '', tipo: 'delivery', direccion: '', pedido: '' });
-      setSelectedOption(null);
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error('Error al enviar el pedido');
+      await supabase.from('pedidos').insert([{ ...form, estado: 'nuevo' }])
+      // Open WhatsApp with pre-filled message
+      const msg = encodeURIComponent(
+        `Hola Próspero! 👋\n\nNombre: ${form.nombre}\nTipo: ${form.tipo === 'delivery' ? '🛵 Delivery' : '🛍️ Recojo'}\n${form.direccion ? `Dirección: ${form.direccion}\n` : ''}Pedido: ${form.pedido}`
+      )
+      window.open(`https://wa.me/51906875085?text=${msg}`, '_blank')
+      setSent(true)
+      setForm({ nombre: '', telefono: '', tipo: 'delivery', direccion: '', pedido: '' })
+    } catch (e) {
+      alert('Error al enviar. Por favor escríbenos directo por WhatsApp.')
     }
-  };
+    setLoading(false)
+  }
 
-  const options = [
-    { id: 'delivery', label: 'Delivery', icon: Bike, description: 'Te lo llevamos a domicilio' },
-    { id: 'recojo', label: 'Recojo', icon: ShoppingBag, description: 'Pasa por tu pedido' },
-    { id: 'reservar', label: 'Reservar', icon: Armchair, description: 'Reserva tu mesa' },
-  ];
-
-  const handleOptionClick = (option) => {
-    if (option.id === 'reservar') {
-      document.getElementById('reservas')?.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
-    setSelectedOption(option.id);
-    setFormData({ ...formData, tipo: option.id });
-  };
+  const inputStyle = {
+    width: '100%', background: 'rgba(240,234,214,0.06)',
+    border: '1px solid rgba(240,234,214,0.13)', color: 'var(--cream)',
+    padding: '13px 16px', borderRadius: 2,
+    fontSize: '0.9rem', fontFamily: "'DM Sans', sans-serif",
+    outline: 'none', marginBottom: 16,
+  }
 
   return (
-    <section id="pedidos" className="py-20 bg-navy reveal">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-cream mb-4">Haz tu Pedido</h2>
-          <p className="text-cream-light text-lg">Elige cómo quieres disfrutar nuestra comida</p>
-        </div>
+    <section id="pedido" style={{ background: 'var(--navy)', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div>
-            <h3 className="font-serif text-2xl font-bold text-cream mb-6">¿Cómo quieres tu pedido?</h3>
-            <div className="space-y-4">
-              {options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => handleOptionClick(option)}
-                  className={`w-full p-6 rounded-sm border-2 transition-all hover:-translate-y-0.5 ${
-                    selectedOption === option.id
-                      ? 'border-cream bg-navy-mid'
-                      : 'border-navy-mid bg-navy-dark hover:border-cream'
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <option.icon size={32} className="text-cream" />
-                    <div className="text-left">
-                      <h4 className="text-cream font-semibold uppercase tracking-wider">{option.label}</h4>
-                      <p className="text-cream-light text-sm">{option.description}</p>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {selectedOption && (
-            <div className="bg-navy-mid p-8 rounded-sm border border-navy-mid">
-              <h3 className="font-serif text-2xl font-bold text-cream mb-6">
-                Pedido por {selectedOption === 'delivery' ? 'Delivery' : 'Recojo'}
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-cream text-sm uppercase tracking-wider mb-2">
-                    Nombre *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.nombre}
-                    onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                    className="w-full px-4 py-3 bg-navy-dark border border-navy-mid rounded-sm text-cream placeholder-cream-muted focus:border-cream focus:outline-none transition-colors"
-                    placeholder="Tu nombre"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-cream text-sm uppercase tracking-wider mb-2">
-                    Teléfono
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.telefono}
-                    onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                    className="w-full px-4 py-3 bg-navy-dark border border-navy-mid rounded-sm text-cream placeholder-cream-muted focus:border-cream focus:outline-none transition-colors"
-                    placeholder="Tu teléfono"
-                  />
-                </div>
-
-                {selectedOption === 'delivery' && (
-                  <div>
-                    <label className="block text-cream text-sm uppercase tracking-wider mb-2">
-                      Dirección
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.direccion}
-                      onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
-                      className="w-full px-4 py-3 bg-navy-dark border border-navy-mid rounded-sm text-cream placeholder-cream-muted focus:border-cream focus:outline-none transition-colors"
-                      placeholder="Tu dirección"
-                    />
-                  </div>
-                )}
-
-                <div>
-                  <label className="block text-cream text-sm uppercase tracking-wider mb-2">
-                    Pedido *
-                  </label>
-                  <textarea
-                    value={formData.pedido}
-                    onChange={(e) => setFormData({ ...formData, pedido: e.target.value })}
-                    className="w-full px-4 py-3 bg-navy-dark border border-navy-mid rounded-sm text-cream placeholder-cream-muted focus:border-cream focus:outline-none transition-colors resize-none"
-                    rows={4}
-                    placeholder="Describe tu pedido..."
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-cream text-navy-dark px-8 py-4 rounded-sm uppercase text-sm tracking-wider font-semibold transition-all hover:transform hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  Enviar Pedido
-                </button>
-              </form>
-            </div>
-          )}
+      {/* LEFT */}
+      <div className="reveal-left" style={{ padding: '90px 60px 90px 80px' }}>
+        <div className="sec-label-light">Sin llamadas · Respuesta inmediata</div>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.8rem', fontWeight: 900, color: 'var(--cream)', lineHeight: 1.1, marginBottom: 44 }}>
+          ¿Cómo quieres<br /><em style={{ fontStyle: 'italic', opacity: 0.55 }}>tu pedido?</em>
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {[
+            { icon: '🛵', title: 'Delivery a domicilio', sub: 'Chiclayo · Yape / Plin / Efectivo al entregar', href: 'https://wa.me/51906875085?text=Hola!%20Quiero%20pedir%20delivery%20🛵' },
+            { icon: '🛍️', title: 'Recojo en local', sub: 'Av. Balta 636 · Listo en 20 minutos', href: 'https://wa.me/51906875085?text=Hola!%20Quiero%20pedir%20para%20recoger%20🛍️' },
+            { icon: '🪑', title: 'Reservar mesa', sub: 'Elige fecha, hora y número de personas', href: '#reservas' },
+          ].map((opt, i) => (
+            <a
+              key={i} href={opt.href}
+              target={opt.href.startsWith('http') ? '_blank' : undefined}
+              rel="noreferrer"
+              style={{
+                display: 'flex', alignItems: 'center', gap: 18,
+                background: 'rgba(240,234,214,0.05)', border: '1px solid var(--border)',
+                padding: '20px 24px', borderRadius: 2, cursor: 'pointer', textDecoration: 'none',
+                transition: 'all 0.22s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(240,234,214,0.1)'; e.currentTarget.style.borderColor = 'rgba(240,234,214,0.28)'; e.currentTarget.style.transform = 'translateX(4px)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(240,234,214,0.05)'; e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateX(0)' }}
+            >
+              <span style={{ fontSize: '1.5rem' }}>{opt.icon}</span>
+              <div>
+                <div style={{ color: 'var(--cream)', fontWeight: 500, fontSize: '0.92rem' }}>{opt.title}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.73rem', marginTop: 2 }}>{opt.sub}</div>
+              </div>
+              <span style={{ marginLeft: 'auto', color: 'var(--muted)' }}>→</span>
+            </a>
+          ))}
         </div>
       </div>
-    </section>
-  );
-};
 
-export default OrderSection;
+      {/* RIGHT — FORM */}
+      <div className="reveal-right" style={{
+        padding: '80px 60px', background: 'rgba(240,234,214,0.03)',
+        borderLeft: '1px solid var(--border)', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      }}>
+        <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.6rem', fontWeight: 700, color: 'var(--cream)', marginBottom: 28 }}>
+          Formulario de Pedido
+        </h3>
+
+        {sent && (
+          <div style={{ background: 'rgba(37,211,102,0.15)', border: '1px solid rgba(37,211,102,0.3)', color: '#4ade80', padding: '12px 16px', borderRadius: 2, marginBottom: 20, fontSize: '0.85rem' }}>
+            ✅ Pedido enviado. Te redirigimos a WhatsApp para confirmar.
+          </div>
+        )}
+
+        <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Tu nombre</label>
+        <input style={inputStyle} placeholder="Ej. María García" value={form.nombre} onChange={e => set('nombre', e.target.value)} />
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Teléfono</label>
+            <input style={inputStyle} type="tel" placeholder="9XX XXX XXX" value={form.telefono} onChange={e => set('telefono', e.target.value)} />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Tipo</label>
+            <select
+              style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
+              value={form.tipo}
+              onChange={e => set('tipo', e.target.value)}
+            >
+              <option value="delivery">🛵 Delivery</option>
+              <option value="recojo">🛍️ Recojo en local</option>
+            </select>
+          </div>
+        </div>
+
+        {form.tipo === 'delivery' && (
+          <>
+            <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Dirección</label>
+            <input style={inputStyle} placeholder="Calle / Av., número, referencia" value={form.direccion} onChange={e => set('direccion', e.target.value)} />
+          </>
+        )}
+
+        <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Tu pedido</label>
+        <input style={inputStyle} placeholder="Ej. 1 Cabrito norteño + 1 Chicha morada jarra" value={form.pedido} onChange={e => set('pedido', e.target.value)} />
+
+        <button
+          onClick={handleSubmit}
+          disabled={loading}
+          style={{
+            width: '100%', background: 'var(--cream)', color: 'var(--navy-dark)',
+            padding: '15px', border: 'none', borderRadius: 2,
+            fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px',
+            cursor: loading ? 'not-allowed' : 'pointer', marginTop: 6,
+            transition: 'all 0.2s', fontFamily: "'DM Sans', sans-serif",
+            opacity: loading ? 0.7 : 1,
+          }}
+          onMouseEnter={e => { if (!loading) { e.currentTarget.style.background = 'white'; e.currentTarget.style.transform = 'translateY(-1px)' }}}
+          onMouseLeave={e => { e.currentTarget.style.background = 'var(--cream)'; e.currentTarget.style.transform = 'translateY(0)' }}
+        >
+          {loading ? 'Enviando...' : <>Enviar pedido por WhatsApp <WhatsAppIcon /></>}
+        </button>
+      </div>
+
+      <style>{`
+        @media(max-width:768px){
+          section#pedido { grid-template-columns: 1fr !important; }
+          section#pedido > div:first-child { padding: 60px 24px !important; }
+          section#pedido > div:last-child  { padding: 40px 24px !important; }
+        }
+      `}</style>
+    </section>
+  )
+}

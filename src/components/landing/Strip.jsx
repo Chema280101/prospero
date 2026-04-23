@@ -1,28 +1,42 @@
-const Strip = () => {
+const items = [
+  { icon: '🛵', title: 'Delivery a domicilio', sub: 'Chiclayo · Yape / Plin / Efectivo' },
+  { icon: '🪑', title: 'Reserva de mesa', sub: 'Confirmación inmediata por WhatsApp' },
+  { icon: '🛍️', title: 'Recojo en local', sub: 'Av. Balta 637 · Listo en 20 min' },
+  { icon: '📱', title: 'Pago fácil', sub: 'Yape / Plin / Efectivo' },
+]
+ 
+export default function Strip() {
   return (
-    <section id="strip" className="bg-navy py-8 border-y border-navy-mid">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="text-3xl mb-2">🛵</div>
-            <p className="text-cream font-semibold uppercase text-sm tracking-wider">Delivery a domicilio</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl mb-2">🪑</div>
-            <p className="text-cream font-semibold uppercase text-sm tracking-wider">Reserva de mesa</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl mb-2">🛍️</div>
-            <p className="text-cream font-semibold uppercase text-sm tracking-wider">Recojo en local</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl mb-2">📱</div>
-            <p className="text-cream font-semibold uppercase text-sm tracking-wider">Yape · Plin · Efectivo</p>
+    <div style={{
+      background: 'var(--navy)',
+      display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+    }}>
+      {items.map((item, i) => (
+        <div
+          key={i}
+          style={{
+            padding: '36px 32px', display: 'flex', alignItems: 'center', gap: 16,
+            borderRight: i < 3 ? '1px solid var(--border)' : 'none',
+            transition: 'background 0.25s', cursor: 'default',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(240,234,214,0.05)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >
+          <span style={{ fontSize: '1.6rem', flexShrink: 0 }}>{item.icon}</span>
+          <div>
+            <div style={{ color: 'var(--cream)', fontSize: '0.88rem', fontWeight: 500 }}>{item.title}</div>
+            <div style={{ color: 'var(--muted)', fontSize: '0.72rem', marginTop: 3 }}>{item.sub}</div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
-
-export default Strip;
+      ))}
+ 
+      <style>{`
+        @media (max-width: 768px) {
+          div[style*="repeat(4, 1fr)"] {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+      `}</style>
+    </div>
+  )
+}
