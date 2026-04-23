@@ -5,18 +5,14 @@ import {
   parapicar, cucharaBrava,
   cafeteria, jugos, refrescantes, gaseosas, cantina,
 } from '../../data/menuData'
- 
+
 function MenuRow({ name, price, bold, desc, img, vaso, jarra, onClick }) {
   const displayPrice = price || vaso || ''
-  
   return (
-    <div 
+    <div
       className="menu-item"
       onClick={onClick}
-      style={{ 
-        cursor: desc ? 'pointer' : 'default',
-        transition: 'background 0.2s',
-      }}
+      style={{ cursor: desc ? 'pointer' : 'default', transition: 'background 0.2s' }}
       onMouseEnter={e => desc && (e.currentTarget.style.background = 'rgba(13,43,78,0.03)')}
       onMouseLeave={e => desc && (e.currentTarget.style.background = 'transparent')}
     >
@@ -28,7 +24,7 @@ function MenuRow({ name, price, bold, desc, img, vaso, jarra, onClick }) {
     </div>
   )
 }
- 
+
 function MenuGroup({ title, items, onItemClick }) {
   return (
     <div style={{ marginBottom: 36 }}>
@@ -39,22 +35,18 @@ function MenuGroup({ title, items, onItemClick }) {
     </div>
   )
 }
- 
+
 function TabDesayunos({ onItemClick }) {
   return (
-    <div className="menu-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px' }}>
+    <div className="menu-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px' }}>
       <div>
         <MenuGroup title="Desayunos" items={desayunos} onItemClick={onItemClick} />
         <MenuGroup title="Complementos" items={complementos} onItemClick={onItemClick} />
       </div>
       <div>
         <MenuGroup title="Sánguches" items={sanguches} onItemClick={onItemClick} />
-        {/* Postre */}
         <div className="menu-group-title">Postre del día</div>
-        <div style={{
-          background: 'var(--navy)', padding: '28px 24px', borderRadius: 2,
-          textAlign: 'center',
-        }}>
+        <div style={{ background: 'var(--navy)', padding: '28px 24px', borderRadius: 2, textAlign: 'center' }}>
           <p style={{ color: 'var(--cream)', fontSize: '0.85rem', lineHeight: 2 }}>
             Crema Volteada de La Casa · Pecado de Chocolate · Tentación de Lúcuma
           </p>
@@ -75,15 +67,13 @@ function TabDesayunos({ onItemClick }) {
 function TabCarta({ onItemClick }) {
   return (
     <div>
-      {/* Espesado badge */}
       <a
-        href="https://wa.me/51906875085?text=Hola%20Pr%C3%B3spero!%F0%9F%91%8B%0A%0AQuiero%20pedir%20el%20plato%20especial%20de%20la%20semana:%0ASu%20Lunes%20de%20Espesado%20-%20S/%2036%0A%0APor%20favor%20confirmar%20disponibilidad."
-        target="_blank"
-        rel="noreferrer"
+        href="https://wa.me/51906875085?text=Hola%20Próspero!%20Quiero%20pedir%20el%20Espesado%20del%20Lunes."
+        target="_blank" rel="noreferrer"
         style={{
-          background: 'var(--navy)', padding: '22px 32px', borderRadius: 2,
+          background: 'var(--navy)', padding: '22px 24px', borderRadius: 2,
           marginBottom: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          textDecoration: 'none', cursor: 'pointer', transition: 'transform 0.2s',
+          textDecoration: 'none', cursor: 'pointer', transition: 'transform 0.2s', gap: 16,
         }}
         onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
         onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
@@ -92,15 +82,15 @@ function TabCarta({ onItemClick }) {
           <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--muted)' }}>
             Plato especial de la semana
           </div>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.5rem', fontWeight: 900, color: 'var(--cream)' }}>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.1rem,3vw,1.5rem)', fontWeight: 900, color: 'var(--cream)' }}>
             Su Lunes de Espesado
           </div>
         </div>
-        <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '2rem', fontWeight: 900, color: 'var(--cream)' }}>
+        <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 900, color: 'var(--cream)', whiteSpace: 'nowrap' }}>
           S/ 36
         </div>
       </a>
-      <div className="menu-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px 80px' }}>
+      <div className="menu-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px 80px' }}>
         <MenuGroup title="Para Picar" items={parapicar} onItemClick={onItemClick} />
         <MenuGroup title="Cuchara Brava" items={cucharaBrava} onItemClick={onItemClick} />
       </div>
@@ -110,8 +100,7 @@ function TabCarta({ onItemClick }) {
 
 function TabBebidas({ onItemClick }) {
   return (
-    <div className="menu-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 60px' }}>
-      {/* Col 1 */}
+    <div className="menu-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 60px' }}>
       <div>
         <MenuGroup title="La Cafetería" items={cafeteria} onItemClick={onItemClick} />
         <p style={{ fontSize: '0.7rem', color: 'rgba(13,43,78,0.4)', fontStyle: 'italic', marginBottom: 28 }}>
@@ -119,29 +108,22 @@ function TabBebidas({ onItemClick }) {
         </p>
         <MenuGroup title="Jugos" items={jugos} onItemClick={onItemClick} />
       </div>
-      {/* Col 2 */}
       <div>
         <div className="menu-group-title">Refrescantes</div>
-        <div className="menu-row-grid" style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0 20px', marginBottom: 6 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0 20px', marginBottom: 6 }}>
           <span />
           {['Vaso', 'Jarra'].map(h => (
             <span key={h} style={{ fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(13,43,78,0.35)' }}>{h}</span>
           ))}
         </div>
         {refrescantes.map((r, i) => (
-          <div 
-            key={i} 
-            className="menu-row-grid"
+          <div
+            key={i}
             onClick={() => onItemClick && r.desc && onItemClick(r)}
-            style={{ 
-              display: 'grid', 
-              gridTemplateColumns: '1fr auto auto', 
-              gap: '0 20px', 
-              alignItems: 'baseline', 
-              padding: '8px 0', 
-              borderBottom: '1px solid rgba(13,43,78,0.08)',
-              cursor: r.desc ? 'pointer' : 'default',
-              transition: 'background 0.2s',
+            style={{
+              display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0 20px',
+              alignItems: 'baseline', padding: '8px 0', borderBottom: '1px solid rgba(13,43,78,0.08)',
+              cursor: r.desc ? 'pointer' : 'default', transition: 'background 0.2s',
             }}
             onMouseEnter={e => r.desc && (e.currentTarget.style.background = 'rgba(13,43,78,0.03)')}
             onMouseLeave={e => r.desc && (e.currentTarget.style.background = 'transparent')}
@@ -158,48 +140,39 @@ function TabBebidas({ onItemClick }) {
           <MenuGroup title="Gaseosas" items={gaseosas} onItemClick={onItemClick} />
         </div>
       </div>
-      {/* Col 3 */}
       <div>
         <MenuGroup title="La Cantina" items={cantina} onItemClick={onItemClick} />
       </div>
     </div>
   )
 }
- 
+
 const TABS = [
   { id: 'des',   label: 'Desayunos' },
   { id: 'carta', label: 'Carta Brava' },
   { id: 'beb',   label: 'Bebidas' },
 ]
- 
+
 export default function MenuSection() {
   const [active, setActive] = useState('des')
   const [selectedItem, setSelectedItem] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleItemClick = (item) => {
-    setSelectedItem(item)
-    setIsModalOpen(true)
-  }
+  const handleItemClick = (item) => { setSelectedItem(item); setIsModalOpen(true) }
+  const handleCloseModal = () => { setIsModalOpen(false); setSelectedItem(null) }
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedItem(null)
-  }
- 
   return (
     <section id="carta" style={{ padding: '100px 80px', background: 'var(--cream-light)' }}>
+
       {/* Header */}
-      <div className="reveal menu-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 52 }}>
+      <div className="reveal menu-header-row">
         <div>
           <div className="sec-label-dark">Lo que servimos</div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 3vw, 3rem)', fontWeight: 900, color: 'var(--navy)', lineHeight: 1.1 }}>
             Nuestra <em style={{ fontStyle: 'italic', color: 'var(--navy-mid)' }}>carta</em>
           </h2>
         </div>
- 
-        {/* Tabs */}
-        <div className="menu-tabs" style={{ display: 'flex', background: 'rgba(13,43,78,0.07)', padding: 4, borderRadius: 3, gap: 3 }}>
+        <div className="menu-tabs-container">
           {TABS.map(tab => (
             <button
               key={tab.id}
@@ -210,7 +183,7 @@ export default function MenuSection() {
                 color: active === tab.id ? 'var(--cream)' : 'rgba(13,43,78,0.4)',
                 fontSize: '0.73rem', fontWeight: 600, textTransform: 'uppercase',
                 letterSpacing: '1.2px', cursor: 'pointer', transition: 'all 0.2s',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'DM Sans', sans-serif", whiteSpace: 'nowrap',
               }}
             >
               {tab.label}
@@ -218,7 +191,7 @@ export default function MenuSection() {
           ))}
         </div>
       </div>
- 
+
       {/* Panel */}
       <div className="reveal">
         {active === 'des'   && <TabDesayunos onItemClick={handleItemClick} />}
@@ -226,40 +199,13 @@ export default function MenuSection() {
         {active === 'beb'   && <TabBebidas onItemClick={handleItemClick} />}
       </div>
 
-      {/* Modal */}
-      <MenuItemModal 
-        item={selectedItem} 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-      />
- 
+      <MenuItemModal item={selectedItem} isOpen={isModalOpen} onClose={handleCloseModal} />
+
       <style>{`
         @media(max-width:768px){
           section#carta { padding: 60px 20px !important; }
-          .menu-header { 
-            flex-direction: column !important; 
-            gap: 20px !important; 
-            align-items: flex-start !important;
-          }
-          .menu-tabs {
-            width: 100% !important;
-            overflow-x: auto !important;
-            flex-wrap: nowrap !important;
-            gap: 4px !important;
-          }
-          .menu-tabs button {
-            flex: 0 0 auto !important;
-            white-space: nowrap !important;
-            padding: 9px 16px !important;
-          }
-          .menu-grid-2 {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-          .menu-grid-3 {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
+          .menu-2col { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .menu-3col { grid-template-columns: 1fr !important; gap: 24px !important; }
         }
       `}</style>
     </section>

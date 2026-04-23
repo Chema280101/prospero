@@ -14,7 +14,6 @@ export default function OrderSection() {
     setLoading(true)
     try {
       await supabase.from('pedidos').insert([{ ...form, estado: 'nuevo' }])
-      // Open WhatsApp with pre-filled message
       const msg = encodeURIComponent(
         `Hola Próspero! 👋\n\nNombre: ${form.nombre}\nTipo: ${form.tipo === 'delivery' ? '🛵 Delivery' : '🛍️ Recojo'}\n${form.direccion ? `Dirección: ${form.direccion}\n` : ''}Pedido: ${form.pedido}`
       )
@@ -35,20 +34,31 @@ export default function OrderSection() {
     outline: 'none', marginBottom: 16,
   }
 
+  const labelStyle = {
+    display: 'block', fontSize: '0.63rem', textTransform: 'uppercase',
+    letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7,
+  }
+
   return (
-    <section id="pedido" style={{ background: 'var(--navy)', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+    <section id="pedido" className="order-grid">
 
       {/* LEFT */}
-      <div className="reveal-left order-left" style={{ padding: '90px 60px 90px 80px' }}>
+      <div className="reveal-left order-left-col" style={{ padding: '90px 60px 90px 80px' }}>
         <div className="sec-label-light">Sin llamadas · Respuesta inmediata</div>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.8rem', fontWeight: 900, color: 'var(--cream)', lineHeight: 1.1, marginBottom: 44 }}>
-          ¿Cómo quieres<br /><em style={{ fontStyle: 'italic', opacity: 0.55 }}>tu pedido?</em>
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+          fontWeight: 900, color: 'var(--cream)', lineHeight: 1.1, marginBottom: 44,
+        }}>
+          ¿Cómo quieres<br />
+          <em style={{ fontStyle: 'italic', opacity: 0.55 }}>tu pedido?</em>
         </h2>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {[
             { icon: '🛵', title: 'Delivery a domicilio', sub: 'Chiclayo · Yape / Plin / Efectivo al entregar', href: 'https://wa.me/51906875085?text=Hola!%20Quiero%20pedir%20delivery%20🛵' },
-            { icon: '🛍️', title: 'Recojo en local', sub: 'Av. Balta 636 · Listo en 20 minutos', href: 'https://wa.me/51906875085?text=Hola!%20Quiero%20pedir%20para%20recoger%20🛍️' },
-            { icon: '🪑', title: 'Reservar mesa', sub: 'Elige fecha, hora y número de personas', href: '#reservas' },
+            { icon: '🛍️', title: 'Recojo en local',     sub: 'Av. Balta 636 · Listo en 20 minutos',          href: 'https://wa.me/51906875085?text=Hola!%20Quiero%20pedir%20para%20recoger%20🛍️' },
+            { icon: '🪑', title: 'Reservar mesa',        sub: 'Elige fecha, hora y número de personas',        href: '#reservas' },
           ].map((opt, i) => (
             <a
               key={i} href={opt.href}
@@ -57,27 +67,29 @@ export default function OrderSection() {
               style={{
                 display: 'flex', alignItems: 'center', gap: 18,
                 background: 'rgba(240,234,214,0.05)', border: '1px solid var(--border)',
-                padding: '20px 24px', borderRadius: 2, cursor: 'pointer', textDecoration: 'none',
+                padding: '18px 20px', borderRadius: 2, cursor: 'pointer', textDecoration: 'none',
                 transition: 'all 0.22s',
               }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(240,234,214,0.1)'; e.currentTarget.style.borderColor = 'rgba(240,234,214,0.28)'; e.currentTarget.style.transform = 'translateX(4px)' }}
               onMouseLeave={e => { e.currentTarget.style.background = 'rgba(240,234,214,0.05)'; e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateX(0)' }}
             >
-              <span style={{ fontSize: '1.5rem' }}>{opt.icon}</span>
-              <div>
-                <div style={{ color: 'var(--cream)', fontWeight: 500, fontSize: '0.92rem' }}>{opt.title}</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.73rem', marginTop: 2 }}>{opt.sub}</div>
+              <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{opt.icon}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ color: 'var(--cream)', fontWeight: 500, fontSize: '0.9rem' }}>{opt.title}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.72rem', marginTop: 2 }}>{opt.sub}</div>
               </div>
-              <span style={{ marginLeft: 'auto', color: 'var(--muted)' }}>→</span>
+              <span style={{ marginLeft: 'auto', color: 'var(--muted)', flexShrink: 0 }}>→</span>
             </a>
           ))}
         </div>
       </div>
 
       {/* RIGHT — FORM */}
-      <div className="reveal-right order-right" style={{
-        padding: '80px 60px', background: 'rgba(240,234,214,0.03)',
-        borderLeft: '1px solid var(--border)', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      <div className="reveal-right order-right-col" style={{
+        padding: '80px 60px',
+        background: 'rgba(240,234,214,0.03)',
+        borderLeft: '1px solid var(--border)',
+        display: 'flex', flexDirection: 'column', justifyContent: 'center',
       }}>
         <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.6rem', fontWeight: 700, color: 'var(--cream)', marginBottom: 28 }}>
           Formulario de Pedido
@@ -89,16 +101,17 @@ export default function OrderSection() {
           </div>
         )}
 
-        <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Tu nombre</label>
+        <label style={labelStyle}>Tu nombre</label>
         <input style={inputStyle} placeholder="Ej. María García" value={form.nombre} onChange={e => set('nombre', e.target.value)} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        {/* Responsive form row */}
+        <div className="order-form-grid">
           <div>
-            <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Teléfono</label>
+            <label style={labelStyle}>Teléfono</label>
             <input style={inputStyle} type="tel" placeholder="9XX XXX XXX" value={form.telefono} onChange={e => set('telefono', e.target.value)} />
           </div>
           <div>
-            <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Tipo</label>
+            <label style={labelStyle}>Tipo</label>
             <select
               style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
               value={form.tipo}
@@ -112,12 +125,12 @@ export default function OrderSection() {
 
         {form.tipo === 'delivery' && (
           <>
-            <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Dirección</label>
+            <label style={labelStyle}>Dirección</label>
             <input style={inputStyle} placeholder="Calle / Av., número, referencia" value={form.direccion} onChange={e => set('direccion', e.target.value)} />
           </>
         )}
 
-        <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'var(--muted)', marginBottom: 7 }}>Tu pedido</label>
+        <label style={labelStyle}>Tu pedido</label>
         <input style={inputStyle} placeholder="Ej. 1 Cabrito norteño + 1 Chicha morada jarra" value={form.pedido} onChange={e => set('pedido', e.target.value)} />
 
         <button
@@ -130,21 +143,15 @@ export default function OrderSection() {
             cursor: loading ? 'not-allowed' : 'pointer', marginTop: 6,
             transition: 'all 0.2s', fontFamily: "'DM Sans', sans-serif",
             opacity: loading ? 0.7 : 1,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           }}
-          onMouseEnter={e => { if (!loading) { e.currentTarget.style.background = 'white'; e.currentTarget.style.transform = 'translateY(-1px)' }}}
+          onMouseEnter={e => { if (!loading) { e.currentTarget.style.background = 'white'; e.currentTarget.style.transform = 'translateY(-1px)' } }}
           onMouseLeave={e => { e.currentTarget.style.background = 'var(--cream)'; e.currentTarget.style.transform = 'translateY(0)' }}
         >
-          {loading ? 'Enviando...' : <>Enviar pedido por WhatsApp <WhatsAppIcon /></>}
+          {loading ? 'Enviando...' : <><WhatsAppIcon /> Enviar pedido por WhatsApp</>}
         </button>
       </div>
 
-      <style>{`
-        @media(max-width:768px){
-          section#pedido { grid-template-columns: 1fr !important; }
-          .order-left { padding: 60px 20px !important; }
-          .order-right { padding: 40px 20px !important; border-left: none !important; border-top: 1px solid var(--border) !important; }
-        }
-      `}</style>
     </section>
   )
 }

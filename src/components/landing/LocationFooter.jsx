@@ -1,6 +1,5 @@
 import { WhatsAppIcon } from '../icons/SocialIcons'
 
-// ── ICONOS SVG de redes sociales ──
 function FacebookIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -25,31 +24,13 @@ function TikTokIcon() {
   )
 }
 
-// ── Links de redes — CAMBIA LAS URLs POR LAS REALES DE PRÓSPERO ──
 const socialLinks = [
-  {
-    href:  'https://facebook.com/PAGINA_DE_PROSPERO',  // 👈 cambia esto
-    icon:  <FacebookIcon />,
-    label: 'Facebook',
-  },
-  {
-    href:  'https://instagram.com/USUARIO_DE_PROSPERO', // 👈 cambia esto
-    icon:  <InstagramIcon />,
-    label: 'Instagram',
-  },
-  {
-    href:  'https://wa.me/51906875085',
-    icon:  <WhatsAppIcon />,
-    label: '906 875 085',
-  },
-  {
-    href:  'https://tiktok.com/@USUARIO_DE_PROSPERO',   // 👈 cambia esto (o elimina si no tienen)
-    icon:  <TikTokIcon />,
-    label: 'TikTok',
-  },
+  { href: 'https://facebook.com/PAGINA_DE_PROSPERO',   icon: <FacebookIcon />,  label: 'Facebook'    },
+  { href: 'https://instagram.com/USUARIO_DE_PROSPERO', icon: <InstagramIcon />, label: 'Instagram'   },
+  { href: 'https://wa.me/51906875085',                  icon: <WhatsAppIcon />,  label: '906 875 085' },
+  { href: 'https://tiktok.com/@USUARIO_DE_PROSPERO',    icon: <TikTokIcon />,    label: 'TikTok'      },
 ]
 
-// ── Link style reutilizable ──
 const linkStyle = {
   display: 'inline-flex', alignItems: 'center', gap: 10,
   color: 'rgba(240,234,214,0.45)', fontSize: '0.85rem',
@@ -58,72 +39,41 @@ const linkStyle = {
 
 export function Location() {
   return (
-    <section id="ubicacion" style={{
-      background: 'var(--navy-dark)', padding: '100px 80px',
-      display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center',
-    }}>
-      {/* MAP */}
+    <section id="ubicacion" className="location-grid">
       <div className="reveal-left" style={{ borderRadius: 2, overflow: 'hidden', minHeight: 360 }}>
         <iframe
           title="Próspero ubicación"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.0!2d-79.8401!3d-6.7714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904cef3a3823a9a7%3A0x17a5a4f6c8b6b4b0!2sAv.%20Balta%20637%2C%20Chiclayo!5e0!3m2!1ses!2spe!4v1"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.0!2d-79.8401!3d-6.7714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904cef3a3823a9a7%3A0x17a5a4f6c8b6b4b0!2sAv.%20Balta%20636%2C%20Chiclayo!5e0!3m2!1ses!2spe!4v1"
           width="100%" height="360"
-          style={{ border: 'none', filter: 'invert(90%) hue-rotate(180deg)' }}
+          style={{ border: 'none', filter: 'invert(90%) hue-rotate(180deg)', display: 'block' }}
           allowFullScreen loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
-
-      {/* INFO */}
       <div className="reveal-right">
         <div className="sec-label-light">Cómo llegar</div>
-        <h2 style={{
-          fontFamily: "'Playfair Display', serif", fontSize: '2.8rem',
-          fontWeight: 900, color: 'var(--cream)', lineHeight: 1.1, marginBottom: 36,
-        }}>
-          Encuéntranos<br />
-          <em style={{ fontStyle: 'italic', opacity: 0.55 }}>en Chiclayo</em>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, color: 'var(--cream)', lineHeight: 1.1, marginBottom: 36 }}>
+          Encuéntranos<br /><em style={{ fontStyle: 'italic', opacity: 0.55 }}>en Chiclayo</em>
         </h2>
-
         {[
-          { icon: '📍', label: 'Dirección',            val: 'Av. Balta 637, Chiclayo, Lambayeque' },
-          { icon: '📱', label: 'WhatsApp / Teléfono',  val: '906 875 085' },
-          { icon: '🕐', label: 'Horario de atención',  val: 'Todos los días desde las 7:00 AM' },
+          { icon: '📍', label: 'Dirección',           val: 'Av. Balta 636, Chiclayo, Lambayeque' },
+          { icon: '📱', label: 'WhatsApp / Teléfono', val: '906 875 085' },
+          { icon: '🕐', label: 'Horario de atención', val: 'Todos los días desde las 7:00 AM' },
         ].map((item, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 18, marginBottom: 24 }}>
-            <div style={{
-              width: 44, height: 44, background: 'rgba(240,234,214,0.08)', borderRadius: '50%',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '1.1rem', flexShrink: 0,
-            }}>
+            <div style={{ width: 44, height: 44, background: 'rgba(240,234,214,0.08)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>
               {item.icon}
             </div>
             <div>
-              <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--muted)', marginBottom: 3 }}>
-                {item.label}
-              </div>
+              <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--muted)', marginBottom: 3 }}>{item.label}</div>
               <div style={{ color: 'var(--cream)', fontSize: '0.92rem' }}>{item.val}</div>
             </div>
           </div>
         ))}
-
-        <a
-          href="https://wa.me/51906875085"
-          target="_blank" rel="noreferrer"
-          className="btn-wa"
-          style={{ marginTop: 8 }}
-        >
+        <a href="https://wa.me/51906875085" target="_blank" rel="noreferrer" className="btn-wa" style={{ marginTop: 8 }}>
           <WhatsAppIcon /> Escribirnos por WhatsApp
         </a>
       </div>
-
-      <style>{`
-        @media(max-width:768px){
-          section#ubicacion { grid-template-columns: 1fr !important; padding: 60px 20px !important; gap: 40px !important; }
-          section#ubicacion iframe { height: 280px !important; min-height: 280px !important; }
-          section#ubicacion h2 { font-size: 2rem !important; }
-        }
-      `}</style>
     </section>
   )
 }
@@ -131,102 +81,46 @@ export function Location() {
 export function Footer() {
   return (
     <footer style={{ background: 'var(--navy)', borderTop: '1px solid var(--border)', padding: '72px 80px 36px' }}>
-      <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '1.8fr 1fr 1fr', gap: 60, marginBottom: 56 }}>
-
-        {/* Brand */}
+      <div className="footer-grid">
         <div>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.2rem', fontWeight: 900, color: 'var(--cream)' }}>
-            Próspero.
-          </div>
-          <div style={{ fontSize: '0.58rem', textTransform: 'uppercase', letterSpacing: '3.5px', color: 'var(--muted)', marginTop: 4 }}>
-            Taberna Peruana
-          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.2rem', fontWeight: 900, color: 'var(--cream)' }}>Próspero.</div>
+          <div style={{ fontSize: '0.58rem', textTransform: 'uppercase', letterSpacing: '3.5px', color: 'var(--muted)', marginTop: 4 }}>Taberna Peruana</div>
           <p style={{ color: 'var(--muted)', fontSize: '0.83rem', lineHeight: 1.75, marginTop: 16, maxWidth: 270 }}>
             Cocina norteña con alma en el corazón de Chiclayo. Desayunos, cuchara brava y la mejor cantina de la ciudad.
           </p>
         </div>
-
-        {/* Servicios */}
         <div>
-          <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '2.5px', color: 'var(--muted)', marginBottom: 18 }}>
-            Servicios
-          </div>
+          <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '2.5px', color: 'var(--muted)', marginBottom: 18 }}>Servicios</div>
           <ul style={{ listStyle: 'none' }}>
-            {[
-              ['#pedido',  'Delivery'],
-              ['#reservas','Reservas'],
-              ['#pedido',  'Recojo en local'],
-              ['#carta',   'Ver carta'],
-            ].map(([href, label]) => (
+            {[['#pedido','Delivery'],['#reservas','Reservas'],['#pedido','Recojo en local'],['#carta','Ver carta']].map(([href, label]) => (
               <li key={label} style={{ marginBottom: 10 }}>
-                <a
-                  href={href}
-                  style={linkStyle}
-                  onMouseEnter={e => e.currentTarget.style.color = 'var(--cream)'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(240,234,214,0.45)'}
-                >
-                  {label}
-                </a>
+                <a href={href} style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = 'var(--cream)'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(240,234,214,0.45)'}>{label}</a>
               </li>
             ))}
           </ul>
         </div>
-
-        {/* Contacto + Redes */}
         <div>
-          <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '2.5px', color: 'var(--muted)', marginBottom: 18 }}>
-            Contacto
-          </div>
+          <div style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '2.5px', color: 'var(--muted)', marginBottom: 18 }}>Contacto</div>
           <ul style={{ listStyle: 'none' }}>
-            {/* Dirección */}
             <li style={{ marginBottom: 10 }}>
-              <a href="#ubicacion" style={linkStyle}
-                onMouseEnter={e => e.currentTarget.style.color = 'var(--cream)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(240,234,214,0.45)'}
-              >
-                📍 Av. Balta 637, Chiclayo
+              <a href="#ubicacion" style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = 'var(--cream)'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(240,234,214,0.45)'}>
+                📍 Av. Balta 636, Chiclayo
               </a>
             </li>
-
-            {/* Redes sociales con iconos SVG reales */}
             {socialLinks.map(s => (
               <li key={s.label} style={{ marginBottom: 10 }}>
-                <a
-                  href={s.href}
-                  target="_blank" rel="noreferrer"
-                  style={linkStyle}
-                  onMouseEnter={e => e.currentTarget.style.color = 'var(--cream)'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(240,234,214,0.45)'}
-                >
-                  {s.icon}
-                  {s.label}
+                <a href={s.href} target="_blank" rel="noreferrer" style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = 'var(--cream)'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(240,234,214,0.45)'}>
+                  {s.icon}{s.label}
                 </a>
               </li>
             ))}
           </ul>
         </div>
       </div>
-
-      {/* Bottom bar */}
-      <div className="footer-bottom" style={{
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        paddingTop: 24, borderTop: '1px solid var(--border)',
-      }}>
-        <span style={{ fontSize: '0.7rem', color: 'rgba(240,234,214,0.2)' }}>
-          © 2025 Próspero Taberna Peruana · Av. Balta 637, Chiclayo, Perú
-        </span>
-        <span style={{ fontSize: '0.7rem', color: 'rgba(240,234,214,0.2)' }}>
-          Desarrollado con ❤️ en Chiclayo
-        </span>
+      <div className="footer-bottom-row">
+        <span style={{ fontSize: '0.7rem', color: 'rgba(240,234,214,0.2)' }}>© 2025 Próspero Taberna Peruana · Av. Balta 636, Chiclayo, Perú</span>
+        <span style={{ fontSize: '0.7rem', color: 'rgba(240,234,214,0.2)' }}>Desarrollado con ❤️ en Chiclayo</span>
       </div>
-
-      <style>{`
-        @media(max-width:768px){
-          footer { padding: 60px 20px 32px !important; }
-          .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-        }
-      `}</style>
     </footer>
   )
 }
