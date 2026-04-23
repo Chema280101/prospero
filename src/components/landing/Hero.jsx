@@ -108,6 +108,9 @@ export default function Hero() {
  
       <style>{`
         @media (max-width: 768px) {
+          section:first-of-type {
+            padding-top: 80px !important;
+          }
           .hero-content {
             padding: 0 20px 64px !important;
             max-width: 100% !important;
