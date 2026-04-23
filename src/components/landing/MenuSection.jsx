@@ -260,6 +260,21 @@ export default function MenuSection() {
             grid-template-columns: 1fr !important;
             gap: 24px !important;
           }
+          .menu-row-grid {
+            grid-template-columns: 1fr auto !important;
+            gap: 0 12px !important;
+          }
+        }
+        @media(max-width:412px){
+          section#carta { padding: 48px 16px !important; }
+          .menu-row-grid {
+            grid-template-columns: 1fr !important;
+            gap: 8px 0 !important;
+          }
+          .menu-row-grid span:nth-child(2),
+          .menu-row-grid span:nth-child(3) {
+            text-align: right !important;
+          }
         }
       `}</style>
     </section>

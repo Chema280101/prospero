@@ -145,6 +145,9 @@ export default function ReservaSection() {
           .reserva-horarios { grid-template-columns: repeat(2, 1fr) !important; }
           .reserva-form-grid { grid-template-columns: 1fr !important; }
         }
+        @media(max-width:412px){
+          .reserva-horarios { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </section>
   )

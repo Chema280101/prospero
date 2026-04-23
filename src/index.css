@@ -16,13 +16,14 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100vw; }
 body {
   background: var(--cream-light);
   color: var(--navy);
   max-width: 100vw;
   overflow-x: hidden;
   font-family: 'DM Sans', sans-serif;
+  position: relative;
 }
 
 /* ── TYPOGRAPHY ── */
@@ -244,11 +245,12 @@ body {
 
 /* ── NAVBAR MOBILE ── */
 .navbar {
-  position: fixed; top: 0; width: 100%; z-index: 500;
+  position: fixed; top: 0; width: 100%; max-width: 100vw; z-index: 500;
   display: flex; justify-content: space-between; align-items: center;
   padding: 18px 60px;
   background: transparent;
   transition: all 0.4s;
+  overflow-x: hidden;
 }
 .navbar.scrolled {
   padding: 12px 60px;
@@ -287,6 +289,7 @@ body {
   height: 100vh; background: var(--navy-dark); z-index: 501;
   padding: 80px 32px 32px; transition: right 0.3s ease;
   display: flex; flex-direction: column; gap: 24px;
+  overflow-x: hidden;
 }
 .nav-mobile-menu.open { right: 0; }
 
@@ -383,6 +386,14 @@ body {
   .testimonial-avatar { margin: 0 auto 16px; }
 }
 
+@media (max-width: 412px) {
+  .testimonials-section { padding: 60px 16px; }
+  .testimonial-card { padding: 16px; }
+  .testimonial-avatar { width: 48px; height: 48px; }
+  .testimonial-name { font-size: 1rem; }
+  .testimonial-text { font-size: 0.9rem; }
+}
+
 /* ── ABOUT SECTION ── */
 .about-section { padding: 120px 60px; background: var(--cream-light); }
 .about-header { text-align: center; margin-bottom: 60px; }
@@ -476,6 +487,13 @@ body {
   .chef-section { padding: 24px; }
 }
 
+@media (max-width: 412px) {
+  .about-section { padding: 60px 16px; }
+  .about-stat-number { font-size: 1.4rem; }
+  .about-stat-label { font-size: 0.7rem; }
+  .chef-section { padding: 20px; }
+}
+
 /* ── FLOATING WHATSAPP BUTTON ── */
 .whatsapp-float {
   position: fixed;
@@ -493,6 +511,8 @@ body {
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-decoration: none;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 .whatsapp-float:hover {
   transform: scale(1.1);

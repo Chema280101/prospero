@@ -64,13 +64,13 @@ export default function Hero() {
         </p>
  
         {/* CTA Buttons */}
-        <div className="anim-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <div className="hero-cta anim-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <a href="#pedido" className="btn-cream">Pedir ahora</a>
           <a href="#carta" className="btn-ghost">Ver carta completa</a>
         </div>
  
         {/* Stats */}
-        <div className="anim-5" style={{
+        <div className="hero-stats anim-5" style={{
           display: 'flex', gap: 0, marginTop: 64,
           paddingTop: 28, borderTop: '1px solid var(--border)',
         }}>
@@ -109,7 +109,7 @@ export default function Hero() {
       <style>{`
         @media (max-width: 768px) {
           section:first-of-type {
-            padding-top: 80px !important;
+            padding-top: 70px !important;
           }
           .hero-content {
             padding: 0 20px 64px !important;
@@ -122,18 +122,18 @@ export default function Hero() {
             font-size: 0.92rem !important;
             max-width: 100% !important;
           }
-          .anim-4 {
+          .hero-cta {
             flex-direction: column !important;
           }
-          .anim-4 a {
+          .hero-cta a {
             text-align: center !important;
           }
-          .anim-5 {
+          .hero-stats {
             flex-direction: column !important;
             gap: 16px !important;
             margin-top: 40px !important;
           }
-          .anim-5 > div {
+          .hero-stats > div {
             border-left: none !important;
             margin-left: 0 !important;
             padding-left: 0 !important;
@@ -141,14 +141,34 @@ export default function Hero() {
             padding-bottom: 12px !important;
             text-align: center;
           }
-          .anim-5 > div:last-child {
+          .hero-stats > div:last-child {
             border-bottom: none !important;
           }
-          .anim-5 > div > div:first-child {
+          .hero-stats > div > div:first-child {
             font-size: 1.4rem !important;
           }
           .anim-6 {
             display: none !important;
+          }
+        }
+        @media (max-width: 412px) {
+          section:first-of-type {
+            padding-top: 60px !important;
+          }
+          .hero-content {
+            padding: 0 16px 48px !important;
+          }
+          .hero-content h1 {
+            font-size: clamp(1.8rem, 12vw, 2.5rem) !important;
+          }
+          .hero-content p {
+            font-size: 0.85rem !important;
+          }
+          .hero-stats > div > div:first-child {
+            font-size: 1.2rem !important;
+          }
+          .hero-stats > div > div:last-child {
+            font-size: 0.55rem !important;
           }
         }
       `}</style>

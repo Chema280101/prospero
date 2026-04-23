@@ -143,6 +143,11 @@ export default function OrderSection() {
           section#pedido { grid-template-columns: 1fr !important; }
           .order-left { padding: 60px 20px !important; }
           .order-right { padding: 40px 20px !important; border-left: none !important; border-top: 1px solid var(--border) !important; }
+          .order-right > div[style*="gridTemplateColumns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+        }
+        @media(max-width:412px){
+          .order-left { padding: 48px 16px !important; }
+          .order-right { padding: 32px 16px !important; }
         }
       `}</style>
     </section>

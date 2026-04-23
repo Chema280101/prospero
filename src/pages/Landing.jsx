@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { WhatsAppIcon } from '../components/icons/SocialIcons'
 import Navbar        from '../components/landing/Navbar'
 import Hero          from '../components/landing/Hero'
 import Strip         from '../components/landing/Strip'
@@ -36,17 +35,6 @@ export default function Landing() {
       <ReservaSection />
       <Location />
       <Footer />
-      
-      {/* Floating WhatsApp Button */}
-      <a
-        href="https://wa.me/51906875085"
-        target="_blank"
-        rel="noreferrer"
-        className="whatsapp-float"
-        aria-label="Contactar por WhatsApp"
-      >
-        <WhatsAppIcon />
-      </a>
     </>
   )
 }

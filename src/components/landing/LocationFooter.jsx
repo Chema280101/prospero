@@ -63,12 +63,12 @@ export function Location() {
       display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center',
     }}>
       {/* MAP */}
-      <div className="reveal-left" style={{ borderRadius: 2, overflow: 'hidden', minHeight: 360 }}>
+      <div className="reveal-left" style={{ borderRadius: 2, overflow: 'hidden', minHeight: 360, maxWidth: '100%' }}>
         <iframe
           title="Próspero ubicación"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.0!2d-79.8401!3d-6.7714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904cef3a3823a9a7%3A0x17a5a4f6c8b6b4b0!2sAv.%20Balta%20637%2C%20Chiclayo!5e0!3m2!1ses!2spe!4v1"
           width="100%" height="360"
-          style={{ border: 'none', filter: 'invert(90%) hue-rotate(180deg)' }}
+          style={{ border: 'none', filter: 'invert(90%) hue-rotate(180deg)', maxWidth: '100%' }}
           allowFullScreen loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
@@ -122,6 +122,11 @@ export function Location() {
           section#ubicacion { grid-template-columns: 1fr !important; padding: 60px 20px !important; gap: 40px !important; }
           section#ubicacion iframe { height: 280px !important; min-height: 280px !important; }
           section#ubicacion h2 { font-size: 2rem !important; }
+        }
+        @media(max-width:412px){
+          section#ubicacion { padding: 48px 16px !important; gap: 32px !important; }
+          section#ubicacion iframe { height: 240px !important; min-height: 240px !important; }
+          section#ubicacion h2 { font-size: 1.6rem !important; }
         }
       `}</style>
     </section>
@@ -225,6 +230,10 @@ export function Footer() {
           footer { padding: 60px 20px 32px !important; }
           .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+        }
+        @media(max-width:412px){
+          footer { padding: 48px 16px 24px !important; }
+          .footer-grid { gap: 32px !important; }
         }
       `}</style>
     </footer>

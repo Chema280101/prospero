@@ -47,6 +47,18 @@ export default function Strip() {
             border-bottom: none !important;
           }
         }
+        @media (max-width: 412px) {
+          .strip-container {
+            grid-template-columns: 1fr !important;
+          }
+          .strip-item:nth-child(3),
+          .strip-item:nth-child(4) {
+            border-bottom: 1px solid var(--border) !important;
+          }
+          .strip-item:last-child {
+            border-bottom: none !important;
+          }
+        }
       `}</style>
     </div>
   )

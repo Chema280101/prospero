@@ -253,6 +253,31 @@ export default function ExperienceSection() {
           .slider-nav.next { right: 12px; }
           .feature-card { padding: 24px; }
         }
+        @media (max-width: 412px) {
+          .experience-section { padding: 48px 16px; }
+          .experience-header { padding: 0; }
+          .experience-slider {
+            aspect-ratio: 3/2;
+            margin-bottom: 32px;
+          }
+          .slider-nav {
+            width: 36px;
+            height: 36px;
+          }
+          .slider-nav.prev { left: 8px; }
+          .slider-nav.next { right: 8px; }
+          .feature-card { padding: 20px; }
+          .feature-icon {
+            width: 56px;
+            height: 56px;
+          }
+          .feature-title {
+            font-size: 1.1rem;
+          }
+          .feature-desc {
+            font-size: 0.85rem;
+          }
+        }
       `}</style>
     </section>
   )
