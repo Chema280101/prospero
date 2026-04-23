@@ -3,7 +3,7 @@ import hero from '../../assets/hero.png'
 export default function Hero() {
   return (
     <section style={{
-      position: 'relative', minHeight: '100dvh',
+      position: 'relative', minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
       overflow: 'hidden', background: 'var(--navy-dark)',
     }}>
@@ -108,6 +108,9 @@ export default function Hero() {
  
       <style>{`
         @media (max-width: 768px) {
+          section:first-of-type {
+            padding-top: 80px !important;
+          }
           .hero-content {
             padding: 0 20px 64px !important;
             max-width: 100% !important;
