@@ -142,7 +142,9 @@ export default function ReservaSection() {
         @media(max-width:768px){
           section#reservas { grid-template-columns: 1fr !important; padding: 60px 20px !important; }
           section#reservas > div:first-child { display: none !important; }
-          div[style*="repeat(4, 1fr)"] { grid-template-columns: repeat(3, 1fr) !important; }
+          div[style*="repeat(4, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+          div[style*="gridTemplateColumns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+          div[style*="padding: 60px 48px"] { padding: 40px 24px !important; }
         }
       `}</style>
     </section>

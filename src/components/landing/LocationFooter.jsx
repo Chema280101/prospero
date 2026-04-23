@@ -221,7 +221,7 @@ export function Footer() {
       <style>{`
         @media(max-width:768px){
           footer { padding: 60px 20px 32px !important; }
-          footer > div:first-child { grid-template-columns: 1fr 1fr !important; }
+          footer > div:first-child { grid-template-columns: 1fr !important; gap: 40px !important; }
           footer > div:last-child { flex-direction: column; gap: 8px; text-align: center; }
         }
       `}</style>

@@ -109,7 +109,29 @@ export default function Hero() {
       <style>{`
         @media (max-width: 768px) {
           section > div[style*="padding: 0 80px"] {
-            padding: 0 24px 64px !important;
+            padding: 0 20px 64px !important;
+            max-width: 100% !important;
+          }
+          section > div[style*="padding: 0 80px"] > div[class*="anim-5"] {
+            flex-direction: column !important;
+            gap: 16px !important;
+          }
+          section > div[style*="padding: 0 80px"] > div[class*="anim-5"] > div {
+            border-left: none !important;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            border-bottom: 1px solid var(--border) !important;
+            padding-bottom: 12px !important;
+            text-align: center;
+          }
+          section > div[style*="padding: 0 80px"] > div[class*="anim-5"] > div:last-child {
+            border-bottom: none !important;
+          }
+          .anim-4 {
+            flex-direction: column !important;
+          }
+          .anim-4 a {
+            text-align: center !important;
           }
         }
       `}</style>

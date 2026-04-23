@@ -68,11 +68,18 @@ function TabDesayunos({ onItemClick }) {
           </p>
         </div>
       </div>
-      <style>{`@media(max-width:768px){div[style*="repeat(2, 1fr)"]{grid-template-columns:1fr!important;}}`}</style>
+      <style>{`
+        @media(max-width:768px){
+          div[style*="gridTemplateColumns: '1fr 1fr'"] {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
- 
+
 function TabCarta({ onItemClick }) {
   return (
     <div>
@@ -105,11 +112,18 @@ function TabCarta({ onItemClick }) {
         <MenuGroup title="Para Picar" items={parapicar} onItemClick={onItemClick} />
         <MenuGroup title="Cuchara Brava" items={cucharaBrava} onItemClick={onItemClick} />
       </div>
-      <style>{`@media(max-width:768px){div[style*="repeat(2, 1fr)"]{grid-template-columns:1fr!important;}}`}</style>
+      <style>{`
+        @media(max-width:768px){
+          div[style*="gridTemplateColumns: '1fr 1fr'"] {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
- 
+
 function TabBebidas({ onItemClick }) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 60px' }}>
@@ -163,7 +177,14 @@ function TabBebidas({ onItemClick }) {
       <div>
         <MenuGroup title="La Cantina" items={cantina} onItemClick={onItemClick} />
       </div>
-      <style>{`@media(max-width:768px){div[style*="repeat(3, 1fr)"]{grid-template-columns:1fr!important;}}`}</style>
+      <style>{`
+        @media(max-width:768px){
+          div[style*="gridTemplateColumns: 'repeat(3, 1fr)'"] {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
@@ -238,7 +259,30 @@ export default function MenuSection() {
       <style>{`
         @media(max-width:768px){
           section#carta { padding: 60px 20px !important; }
-          div[style*="flex; justifyContent: space-between"] { flex-direction: column; gap: 20px; }
+          div[style*="justifyContent: space-between"] { 
+            flex-direction: column !important; 
+            gap: 20px !important; 
+            align-items: flex-start !important;
+          }
+          div[style*="background: rgba(13,43,78,0.07)"] {
+            width: 100% !important;
+            overflow-x: auto !important;
+            flex-wrap: nowrap !important;
+            gap: 4px !important;
+          }
+          div[style*="background: rgba(13,43,78,0.07)"] button {
+            flex: 0 0 auto !important;
+            white-space: nowrap !important;
+            padding: 9px 16px !important;
+          }
+          div[style*="gridTemplateColumns: 1fr 1fr"] {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+          div[style*="gridTemplateColumns: 1fr 1fr 1fr"] {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
         }
       `}</style>
     </section>

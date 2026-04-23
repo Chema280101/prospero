@@ -141,8 +141,9 @@ export default function OrderSection() {
       <style>{`
         @media(max-width:768px){
           section#pedido { grid-template-columns: 1fr !important; }
-          section#pedido > div:first-child { padding: 60px 24px !important; }
-          section#pedido > div:last-child  { padding: 40px 24px !important; }
+          section#pedido > div:first-child { padding: 60px 20px !important; }
+          section#pedido > div:last-child  { padding: 40px 20px !important; }
+          section#pedido > div:last-child { border-left: none !important; border-top: 1px solid var(--border) !important; }
         }
       `}</style>
     </section>

@@ -32,8 +32,23 @@ export default function Strip() {
  
       <style>{`
         @media (max-width: 768px) {
+          div[style*="background: var(--navy)"] {
+            padding: 20px !important;
+          }
           div[style*="repeat(4, 1fr)"] {
             grid-template-columns: 1fr 1fr !important;
+          }
+          div[style*="padding: 36px 32px"] {
+            padding: 20px 16px !important;
+            border-right: none !important;
+            border-bottom: 1px solid var(--border) !important;
+          }
+          div[style*="padding: 36px 32px"]:nth-child(2) {
+            border-bottom: 1px solid var(--border) !important;
+          }
+          div[style*="padding: 36px 32px"]:nth-child(3),
+          div[style*="padding: 36px 32px"]:nth-child(4) {
+            border-bottom: none !important;
           }
         }
       `}</style>
