@@ -30,7 +30,7 @@ export default function Hero() {
       }} />
  
       {/* CONTENT */}
-      <div style={{
+      <div className="hero-content" style={{
         position: 'relative', zIndex: 10,
         padding: '0 80px 80px',
         maxWidth: 760,
@@ -108,15 +108,29 @@ export default function Hero() {
  
       <style>{`
         @media (max-width: 768px) {
-          section > div[style*="padding: 0 80px"] {
+          .hero-content {
             padding: 0 20px 64px !important;
             max-width: 100% !important;
           }
-          section > div[style*="padding: 0 80px"] > div[class*="anim-5"] {
+          .hero-content h1 {
+            font-size: clamp(2.2rem, 10vw, 3.2rem) !important;
+          }
+          .hero-content p {
+            font-size: 0.92rem !important;
+            max-width: 100% !important;
+          }
+          .anim-4 {
+            flex-direction: column !important;
+          }
+          .anim-4 a {
+            text-align: center !important;
+          }
+          .anim-5 {
             flex-direction: column !important;
             gap: 16px !important;
+            margin-top: 40px !important;
           }
-          section > div[style*="padding: 0 80px"] > div[class*="anim-5"] > div {
+          .anim-5 > div {
             border-left: none !important;
             margin-left: 0 !important;
             padding-left: 0 !important;
@@ -124,14 +138,14 @@ export default function Hero() {
             padding-bottom: 12px !important;
             text-align: center;
           }
-          section > div[style*="padding: 0 80px"] > div[class*="anim-5"] > div:last-child {
+          .anim-5 > div:last-child {
             border-bottom: none !important;
           }
-          .anim-4 {
-            flex-direction: column !important;
+          .anim-5 > div > div:first-child {
+            font-size: 1.4rem !important;
           }
-          .anim-4 a {
-            text-align: center !important;
+          .anim-6 {
+            display: none !important;
           }
         }
       `}</style>

@@ -46,7 +46,7 @@ export default function ReservaSection() {
     <section id="reservas" style={{ padding: '100px 80px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', background: 'var(--cream-light)' }}>
 
       {/* LEFT — visual card */}
-      <div className="reveal-left" style={{
+      <div className="reveal-left reserva-visual" style={{
         background: 'var(--navy)', borderRadius: 2, padding: '60px 48px',
         display: 'flex', flexDirection: 'column', gap: 28, minHeight: 460,
         justifyContent: 'center', position: 'relative', overflow: 'hidden',
@@ -84,7 +84,7 @@ export default function ReservaSection() {
           Elige el día, la hora y cuántos son. Sin llamadas, sin esperas.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
+        <div className="reserva-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
           <div>
             <label style={{ display: 'block', fontSize: '0.63rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'rgba(13,43,78,0.45)', marginBottom: 7 }}>Tu nombre</label>
             <input style={inputStyle} placeholder="Nombre completo" value={form.nombre} onChange={e => set('nombre', e.target.value)} />
@@ -106,7 +106,7 @@ export default function ReservaSection() {
         <p style={{ fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '1.8px', color: 'rgba(13,43,78,0.4)', marginBottom: 10 }}>
           Selecciona un horario
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 28 }}>
+        <div className="reserva-horarios" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 28 }}>
           {HORARIOS.map((h) => (
             <button
               key={h.label}
@@ -141,10 +141,9 @@ export default function ReservaSection() {
       <style>{`
         @media(max-width:768px){
           section#reservas { grid-template-columns: 1fr !important; padding: 60px 20px !important; }
-          section#reservas > div:first-child { display: none !important; }
-          div[style*="repeat(4, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
-          div[style*="gridTemplateColumns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-          div[style*="padding: 60px 48px"] { padding: 40px 24px !important; }
+          .reserva-visual { display: none !important; }
+          .reserva-horarios { grid-template-columns: repeat(2, 1fr) !important; }
+          .reserva-form-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

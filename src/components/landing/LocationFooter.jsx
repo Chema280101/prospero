@@ -131,7 +131,7 @@ export function Location() {
 export function Footer() {
   return (
     <footer style={{ background: 'var(--navy)', borderTop: '1px solid var(--border)', padding: '72px 80px 36px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1fr 1fr', gap: 60, marginBottom: 56 }}>
+      <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '1.8fr 1fr 1fr', gap: 60, marginBottom: 56 }}>
 
         {/* Brand */}
         <div>
@@ -208,7 +208,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{
+      <div className="footer-bottom" style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         paddingTop: 24, borderTop: '1px solid var(--border)',
       }}>
@@ -223,8 +223,8 @@ export function Footer() {
       <style>{`
         @media(max-width:768px){
           footer { padding: 60px 20px 32px !important; }
-          footer > div:first-child { grid-template-columns: 1fr !important; gap: 40px !important; }
-          footer > div:last-child { flex-direction: column; gap: 8px; text-align: center; }
+          .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
         }
       `}</style>
     </footer>

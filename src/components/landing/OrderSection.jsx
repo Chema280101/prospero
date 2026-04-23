@@ -39,7 +39,7 @@ export default function OrderSection() {
     <section id="pedido" style={{ background: 'var(--navy)', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
 
       {/* LEFT */}
-      <div className="reveal-left" style={{ padding: '90px 60px 90px 80px' }}>
+      <div className="reveal-left order-left" style={{ padding: '90px 60px 90px 80px' }}>
         <div className="sec-label-light">Sin llamadas · Respuesta inmediata</div>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.8rem', fontWeight: 900, color: 'var(--cream)', lineHeight: 1.1, marginBottom: 44 }}>
           ¿Cómo quieres<br /><em style={{ fontStyle: 'italic', opacity: 0.55 }}>tu pedido?</em>
@@ -75,7 +75,7 @@ export default function OrderSection() {
       </div>
 
       {/* RIGHT — FORM */}
-      <div className="reveal-right" style={{
+      <div className="reveal-right order-right" style={{
         padding: '80px 60px', background: 'rgba(240,234,214,0.03)',
         borderLeft: '1px solid var(--border)', display: 'flex', flexDirection: 'column', justifyContent: 'center',
       }}>
@@ -141,9 +141,8 @@ export default function OrderSection() {
       <style>{`
         @media(max-width:768px){
           section#pedido { grid-template-columns: 1fr !important; }
-          section#pedido > div:first-child { padding: 60px 20px !important; }
-          section#pedido > div:last-child  { padding: 40px 20px !important; }
-          section#pedido > div:last-child { border-left: none !important; border-top: 1px solid var(--border) !important; }
+          .order-left { padding: 60px 20px !important; }
+          .order-right { padding: 40px 20px !important; border-left: none !important; border-top: 1px solid var(--border) !important; }
         }
       `}</style>
     </section>

@@ -42,7 +42,7 @@ function MenuGroup({ title, items, onItemClick }) {
  
 function TabDesayunos({ onItemClick }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px' }}>
+    <div className="menu-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px' }}>
       <div>
         <MenuGroup title="Desayunos" items={desayunos} onItemClick={onItemClick} />
         <MenuGroup title="Complementos" items={complementos} onItemClick={onItemClick} />
@@ -68,14 +68,6 @@ function TabDesayunos({ onItemClick }) {
           </p>
         </div>
       </div>
-      <style>{`
-        @media(max-width:768px){
-          div[style*="gridTemplateColumns: '1fr 1fr'"] {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }
@@ -108,25 +100,17 @@ function TabCarta({ onItemClick }) {
           S/ 36
         </div>
       </a>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px 80px' }}>
+      <div className="menu-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px 80px' }}>
         <MenuGroup title="Para Picar" items={parapicar} onItemClick={onItemClick} />
         <MenuGroup title="Cuchara Brava" items={cucharaBrava} onItemClick={onItemClick} />
       </div>
-      <style>{`
-        @media(max-width:768px){
-          div[style*="gridTemplateColumns: '1fr 1fr'"] {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }
 
 function TabBebidas({ onItemClick }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 60px' }}>
+    <div className="menu-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 60px' }}>
       {/* Col 1 */}
       <div>
         <MenuGroup title="La Cafetería" items={cafeteria} onItemClick={onItemClick} />
@@ -138,7 +122,7 @@ function TabBebidas({ onItemClick }) {
       {/* Col 2 */}
       <div>
         <div className="menu-group-title">Refrescantes</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0 20px', marginBottom: 6 }}>
+        <div className="menu-row-grid" style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0 20px', marginBottom: 6 }}>
           <span />
           {['Vaso', 'Jarra'].map(h => (
             <span key={h} style={{ fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(13,43,78,0.35)' }}>{h}</span>
@@ -147,6 +131,7 @@ function TabBebidas({ onItemClick }) {
         {refrescantes.map((r, i) => (
           <div 
             key={i} 
+            className="menu-row-grid"
             onClick={() => onItemClick && r.desc && onItemClick(r)}
             style={{ 
               display: 'grid', 
@@ -177,14 +162,6 @@ function TabBebidas({ onItemClick }) {
       <div>
         <MenuGroup title="La Cantina" items={cantina} onItemClick={onItemClick} />
       </div>
-      <style>{`
-        @media(max-width:768px){
-          div[style*="gridTemplateColumns: 'repeat(3, 1fr)'"] {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }
@@ -213,7 +190,7 @@ export default function MenuSection() {
   return (
     <section id="carta" style={{ padding: '100px 80px', background: 'var(--cream-light)' }}>
       {/* Header */}
-      <div className="reveal" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 52 }}>
+      <div className="reveal menu-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 52 }}>
         <div>
           <div className="sec-label-dark">Lo que servimos</div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 3vw, 3rem)', fontWeight: 900, color: 'var(--navy)', lineHeight: 1.1 }}>
@@ -222,7 +199,7 @@ export default function MenuSection() {
         </div>
  
         {/* Tabs */}
-        <div style={{ display: 'flex', background: 'rgba(13,43,78,0.07)', padding: 4, borderRadius: 3, gap: 3 }}>
+        <div className="menu-tabs" style={{ display: 'flex', background: 'rgba(13,43,78,0.07)', padding: 4, borderRadius: 3, gap: 3 }}>
           {TABS.map(tab => (
             <button
               key={tab.id}
@@ -259,27 +236,27 @@ export default function MenuSection() {
       <style>{`
         @media(max-width:768px){
           section#carta { padding: 60px 20px !important; }
-          div[style*="justifyContent: space-between"] { 
+          .menu-header { 
             flex-direction: column !important; 
             gap: 20px !important; 
             align-items: flex-start !important;
           }
-          div[style*="background: rgba(13,43,78,0.07)"] {
+          .menu-tabs {
             width: 100% !important;
             overflow-x: auto !important;
             flex-wrap: nowrap !important;
             gap: 4px !important;
           }
-          div[style*="background: rgba(13,43,78,0.07)"] button {
+          .menu-tabs button {
             flex: 0 0 auto !important;
             white-space: nowrap !important;
             padding: 9px 16px !important;
           }
-          div[style*="gridTemplateColumns: 1fr 1fr"] {
+          .menu-grid-2 {
             grid-template-columns: 1fr !important;
             gap: 24px !important;
           }
-          div[style*="gridTemplateColumns: 1fr 1fr 1fr"] {
+          .menu-grid-3 {
             grid-template-columns: 1fr !important;
             gap: 24px !important;
           }
