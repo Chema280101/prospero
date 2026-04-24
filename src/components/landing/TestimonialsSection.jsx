@@ -3,46 +3,32 @@ const GOOGLE_PLACE_ID = 'YOUR_GOOGLE_PLACE_ID'
 
 const testimonials = [
   {
-    name: 'Carlos R.',
-    dish: 'Cuchara Brava',
-    text: 'La mejor cuchara brava de Chiclayo. El sabor auténtico norteño que no se encuentra en otro lado.',
+    name: 'Gabriel Valverde Tuanama',
+    dish: 'Tortitas de choclo',
+    text: 'Las tortitas de choclo fueron espectaculares (10/10), no he probado algo tan bueno como eso, el arroz con chancho muy sabroso (8/10) y el asado de tira con puré fue muy bueno (9/10). Creo que Próspero es un lugar visitable sí o sí de paso en Chiclayo.',
     rating: 5,
-    avatar: '/avatars/carlos.jpg',
+    avatar: '/avatars/gabriel.jpg',
   },
   {
-    name: 'María G.',
-    dish: 'Chicharrón de Chancho',
-    text: 'Increíble. El chicharrón está crocante por fuera y suave por dentro. Vengo cada domingo con mi familia.',
+    name: 'CRL CAB FROILÁN MESÍA MARINO',
+    dish: 'Comida típica',
+    text: 'Excelente comida típica de nuestro querido Chiclayo....de verdad que recuperaron la verdadera sazón de la abuela.',
     rating: 5,
-    avatar: '/avatars/maria.jpg',
+    avatar: '/avatars/froilan.jpg',
   },
   {
-    name: 'Jorge L.',
-    dish: 'Frito Chiclayano',
-    text: 'El cabrito es tierno y bien sazonado. Me recuerda a los domingos de mi infancia en Lambayeque.',
+    name: 'Elvira Nathaly Lupú Arias',
+    dish: 'Comida general',
+    text: 'Muy rica la comida, los precios son accesibles y la atención es muy buena, son muy amables. Hay estacionamiento en la parte posterior, por si vienen con carro.',
     rating: 5,
-    avatar: '/avatars/jorge.jpg',
+    avatar: '/avatars/elvira.jpg',
   },
   {
-    name: 'Ana P.',
-    dish: 'Cau Cau',
-    text: 'Receta de la abuela, se nota el amor en cada cucharada. El mondongo está perfecto.',
+    name: 'Sergio Venero',
+    dish: 'Calentado norteño',
+    text: 'Excelente lugar, primer día en Chiclayo y sin duda la mejor opción para empezar. Recomiendo el calentado norteño, exquisito.',
     rating: 5,
-    avatar: '/avatars/ana.jpg',
-  },
-  {
-    name: 'Pedro M.',
-    dish: 'Patita con Maní',
-    text: 'La salsa de maní es espectacular. Crema, sustancioso y con el sazón justo.',
-    rating: 5,
-    avatar: '/avatars/pedro.jpg',
-  },
-  {
-    name: 'Lucía S.',
-    dish: 'Sangrecita',
-    text: 'Plato tradicional que casi no se encuentra. Aquí lo preparan como debe ser.',
-    rating: 5,
-    avatar: '/avatars/lucia.jpg',
+    avatar: '/avatars/sergio.jpg',
   },
 ]
 
@@ -99,14 +85,9 @@ export default function TestimonialsSection() {
                   "{t.text}"
                 </p>
 
-                {/* Name & Dish */}
-                <div>
-                  <div className="testimonial-name">
-                    {t.name}
-                  </div>
-                  <div className="testimonial-dish">
-                    Probó: {t.dish}
-                  </div>
+                {/* Name */}
+                <div className="testimonial-name">
+                  {t.name}
                 </div>
               </div>
             </div>

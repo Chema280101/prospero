@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, Music, Users, Heart } from 'lucide-react'
 
 const images = [
-  '/experience/ambiente-1.jpg',
+  '/experience/ambiente-1.png',
   '/experience/ambiente-2.jpg',
   '/experience/ambiente-3.jpg',
 ]
